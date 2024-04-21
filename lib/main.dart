@@ -84,9 +84,7 @@ class MyHomePageState extends State<MyHomePage> {
                   const ParameterCard(label: 'Необходимое количество жидкости'),
                   ElevatedButton(
                     child: const Text('Готово'),
-                    onPressed: () {
-                      // Добавьте обработку нажатия кнопки "Готово"
-                    },
+                    onPressed: () {},
                   ),
                 ],
               ),
