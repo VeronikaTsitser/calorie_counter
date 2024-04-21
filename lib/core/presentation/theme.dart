@@ -2,17 +2,26 @@ import 'package:flutter/material.dart';
 
 abstract final class AppTheme {
   static final lightTheme = ThemeData(
+    useMaterial3: false,
+    scaffoldBackgroundColor: AppColors.greyContainer,
     brightness: Brightness.light,
     primaryColor: AppColors.primary,
     fontFamily: 'Inter',
     textTheme: AppTextTheme.theme,
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
+        minimumSize: const Size(double.infinity, 46),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         padding: const EdgeInsets.symmetric(vertical: 13),
         textStyle: AppTextStyle.s20w700.copyWith(color: Colors.white),
         backgroundColor: AppColors.primary,
       ),
+    ),
+    appBarTheme: const AppBarTheme(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(bottom: Radius.circular(20))),
+      backgroundColor: Colors.white,
+      elevation: 0,
+      titleTextStyle: AppTextStyle.s20w700,
     ),
   );
 }
