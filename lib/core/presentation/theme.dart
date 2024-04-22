@@ -1,35 +1,34 @@
 import 'package:flutter/material.dart';
 
-abstract final class AppTheme {
-  static final lightTheme = ThemeData(
-    useMaterial3: false,
-    scaffoldBackgroundColor: AppColors.greyContainer,
-    brightness: Brightness.light,
-    primaryColor: AppColors.primary,
-    fontFamily: 'Inter',
-    textTheme: AppTextTheme.theme,
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
-        minimumSize: const Size(double.infinity, 46),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        padding: const EdgeInsets.symmetric(vertical: 13),
-        textStyle: AppTextStyle.s20w700.copyWith(color: Colors.white),
-        backgroundColor: AppColors.primary,
+ThemeData get lightTheme => ThemeData(
+      useMaterial3: false,
+      scaffoldBackgroundColor: AppColors.greyContainer,
+      brightness: Brightness.light,
+      primaryColor: AppColors.primary,
+      fontFamily: 'Inter',
+      textTheme: AppTextTheme.theme,
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          minimumSize: const Size(double.infinity, 46),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          padding: const EdgeInsets.symmetric(vertical: 13),
+          textStyle: AppTextStyle.s20w700.copyWith(color: Colors.white),
+          backgroundColor: AppColors.primary,
+        ),
       ),
-    ),
-    appBarTheme: const AppBarTheme(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(bottom: Radius.circular(20))),
-      backgroundColor: Colors.white,
-      elevation: 0,
-      titleTextStyle: AppTextStyle.s20w700,
-    ),
-  );
-}
+      appBarTheme: const AppBarTheme(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(bottom: Radius.circular(20))),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        titleTextStyle: AppTextStyle.s20w700,
+      ),
+    );
 
 abstract final class AppColors {
   static const primary = Color.fromRGBO(52, 199, 89, 1);
   static const primaryBg = Color.fromRGBO(52, 199, 89, 0.1);
   static const greyContainer = Color.fromRGBO(245, 245, 245, 1);
+  static const destructiveRed = Color.fromRGBO(255, 59, 48, 1);
 
   static final hint = Colors.black.withOpacity(0.6);
 }
