@@ -3,13 +3,13 @@ import 'package:calorie_counter/features/body_parameters/domain/models/body_para
 import 'package:flutter/material.dart';
 
 class BodyParameterNotifier extends ChangeNotifier {
-  final BodyParametersRepositoryImpl repository;
+  final BodyParametersRepositoryImpl bodyParametersRepository;
   bool isInitialized = false;
 
-  BodyParameterNotifier(this.repository);
+  BodyParameterNotifier(this.bodyParametersRepository);
 
   Future<void> init() async {
-    final value = await repository.getBodyParameter();
+    final value = await bodyParametersRepository.getBodyParameter();
     _weight = value.weight;
     _height = value.height;
     _fatPercentage = value.fatPercentage;
@@ -23,7 +23,7 @@ class BodyParameterNotifier extends ChangeNotifier {
   }
 
   Future<void> saveBodyParameters() async {
-    await repository.setBodyParameters(
+    await bodyParametersRepository.setBodyParameters(
       BodyParametersModel(
         weight: _weight,
         height: _height,
