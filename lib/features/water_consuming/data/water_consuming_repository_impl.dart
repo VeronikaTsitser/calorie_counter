@@ -7,16 +7,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class WaterConsumingRepositoryImpl implements WaterConsumingRepository {
   @override
-  Future<WaterConsumingModel> getWaterConsuming() async {
+  Future<List<WaterConsumingModel>> getWaterConsuming() async {
     final pref = await SharedPreferences.getInstance();
-    final waterConsuming = pref.getString('waterConsuming') ?? '';
+    final waterConsuming = pref.getStringList('waterConsuming') ?? [];
     log('waterConsuming: $waterConsuming');
-    return WaterConsumingModel.fromJson(jsonDecode(waterConsuming));
+    return waterConsuming.map((e) => WaterConsumingModel.fromJson(jsonDecode(e))).toList();
   }
 
   @override
-  Future<void> setWaterConsuming(WaterConsumingModel waterConsuming) async {
+  Future<void> setWaterConsuming(List<WaterConsumingModel> waterConsuming) async {
     final pref = await SharedPreferences.getInstance();
-    await pref.setString('waterConsuming', jsonEncode(waterConsuming.toJson()));
+    await pref.setStringList('waterConsuming', waterConsuming.map((e) => jsonEncode(e.toJson())).toList());
   }
 }

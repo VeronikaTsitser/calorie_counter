@@ -36,9 +36,9 @@ class ActionSheet extends StatelessWidget {
 
 enum PopUpAction { edit, clear }
 
-Future<DateTime?> showAppTimePicker(BuildContext context) => showCupertinoModalPopup(
+Future<DateTime?> showAppTimePicker(BuildContext context, DateTime initialTime) => showCupertinoModalPopup(
       context: context,
-      builder: (BuildContext context) => const AppTimePicker(),
+      builder: (BuildContext context) => AppTimePicker(initialTime: initialTime),
     ).then((value) {
       log('value: $value');
       return value;
@@ -47,14 +47,16 @@ Future<DateTime?> showAppTimePicker(BuildContext context) => showCupertinoModalP
 class AppTimePicker extends StatefulWidget {
   const AppTimePicker({
     super.key,
+    required this.initialTime,
   });
+  final DateTime initialTime;
 
   @override
   State<AppTimePicker> createState() => _AppTimePickerState();
 }
 
 class _AppTimePickerState extends State<AppTimePicker> {
-  DateTime? value = DateTime.now();
+  late DateTime value = widget.initialTime;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -69,7 +71,7 @@ class _AppTimePickerState extends State<AppTimePicker> {
             height: 200,
             child: CupertinoDatePicker(
               mode: CupertinoDatePickerMode.time,
-              initialDateTime: DateTime.now(),
+              initialDateTime: widget.initialTime,
               onDateTimeChanged: (DateTime newTime) => value = newTime,
             ),
           ),

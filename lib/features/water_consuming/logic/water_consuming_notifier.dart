@@ -6,24 +6,20 @@ class WaterConsumingNotifier extends ChangeNotifier {
   WaterConsumingNotifier(this._waterConsumingRepository);
   final WaterConsumingRepositoryImpl _waterConsumingRepository;
 
-  void addWaterConsuming() {
-    _waterConsumingRepository.setWaterConsuming(WaterConsumingModel(
-      name: _drinkName,
-      consumedWaterValue: _waterConsuming,
-      date: _lastWaterConsumingTime,
+  final List<WaterConsumingModel> _waterConsumingList = [];
+  List<WaterConsumingModel> get waterConsumingList => _waterConsumingList;
+
+  Future<void> addWaterConsuming({
+    required String drinkName,
+    required int waterConsuming,
+    required DateTime lastWaterConsumingTime,
+  }) async {
+    _waterConsumingList.add(WaterConsumingModel(
+      name: drinkName,
+      consumedWaterValue: waterConsuming,
+      date: lastWaterConsumingTime,
     ));
+    await _waterConsumingRepository.setWaterConsuming(_waterConsumingList);
     notifyListeners();
   }
-
-  int _waterConsuming = 0;
-  int get waterConsuming => _waterConsuming;
-  void setWaterConsuming(int value) => _waterConsuming = value;
-
-  DateTime _lastWaterConsumingTime = DateTime.now();
-  DateTime get lastWaterConsumingTime => _lastWaterConsumingTime;
-  void setLastWaterConsumingTime(DateTime value) => _lastWaterConsumingTime = value;
-
-  String _drinkName = '';
-  String get drinkName => _drinkName;
-  void setDrinkName(String value) => _drinkName = value;
 }
