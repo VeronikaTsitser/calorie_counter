@@ -1,9 +1,13 @@
 import 'package:calorie_counter/core/presentation/theme.dart';
+import 'package:calorie_counter/features/body_parameters/data/body_parameters_repository_impl.dart';
+import 'package:calorie_counter/features/body_parameters/logic/body_parameters_notifier.dart';
 import 'package:calorie_counter/features/dash_board/presentation/dash_board_screen.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(DevicePreview(enabled: kDebugMode, builder: (context) => const MyApp()));
@@ -18,7 +22,13 @@ class MyApp extends StatelessWidget {
       designSize: const Size(393, 852),
       child: MaterialApp(
         theme: AppTheme.lightTheme,
-        home: const DashBoardScreen(),
+        home: RepositoryProvider(
+          create: (context) => BodyParametersRepositoryImpl(),
+          child: ChangeNotifierProvider(
+            create: (context) => BodyParameterNotifier(context.read<BodyParametersRepositoryImpl>()),
+            child: const DashBoardScreen(),
+          ),
+        ),
       ),
     );
   }
