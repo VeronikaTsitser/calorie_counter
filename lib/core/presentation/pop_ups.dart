@@ -35,3 +35,50 @@ class ActionSheet extends StatelessWidget {
 }
 
 enum PopUpAction { edit, clear }
+
+Future<DateTime?> showAppTimePicker(BuildContext context) => showCupertinoModalPopup(
+      context: context,
+      builder: (BuildContext context) => const AppTimePicker(),
+    ).then((value) {
+      log('value: $value');
+      return value;
+    });
+
+class AppTimePicker extends StatefulWidget {
+  const AppTimePicker({
+    super.key,
+  });
+
+  @override
+  State<AppTimePicker> createState() => _AppTimePickerState();
+}
+
+class _AppTimePickerState extends State<AppTimePicker> {
+  DateTime? value = DateTime.now();
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: const BoxDecoration(
+        color: CupertinoColors.white,
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(
+            height: 200,
+            child: CupertinoDatePicker(
+              mode: CupertinoDatePickerMode.time,
+              initialDateTime: DateTime.now(),
+              onDateTimeChanged: (DateTime newTime) => value = newTime,
+            ),
+          ),
+          CupertinoButton(
+            child: const Text('Готово'),
+            onPressed: () => Navigator.pop(context, value),
+          ),
+        ],
+      ),
+    );
+  }
+}
