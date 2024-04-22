@@ -21,11 +21,11 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(393, 852),
       child: MaterialApp(
-        theme: AppTheme.lightTheme,
+        theme: lightTheme,
         home: RepositoryProvider(
           create: (context) => BodyParametersRepositoryImpl(),
           child: ChangeNotifierProvider(
-            create: (context) => BodyParameterNotifier(context.read<BodyParametersRepositoryImpl>()),
+            create: (context) => BodyParameterNotifier(context.read<BodyParametersRepositoryImpl>())..init(),
             child: const DashBoardScreen(),
           ),
         ),

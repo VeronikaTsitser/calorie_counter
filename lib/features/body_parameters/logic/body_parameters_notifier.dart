@@ -4,58 +4,98 @@ import 'package:flutter/material.dart';
 
 class BodyParameterNotifier extends ChangeNotifier {
   final BodyParametersRepositoryImpl repository;
+  bool isInitialized = false;
 
   BodyParameterNotifier(this.repository);
 
-  void setBodyParameters({
-    double? weight,
-    int? height,
-    int? fatPercentage,
-    int? calories,
-    int? water,
-  }) {
-    repository.setBodyParameters(BodyParametersModel(
-      weight: weight,
-      height: height,
-      fatPercentage: fatPercentage,
-      calories: calories,
-      water: water,
-    ));
+  Future<void> init() async {
+    final value = await repository.getBodyParameter();
+    _weight = value.weight;
+    _height = value.height;
+    _fatPercentage = value.fatPercentage;
+    _calories = value.calories;
+    _water = value.water;
+    if (_weight == null && _height == null && _fatPercentage == null && _calories == null && _water == null) {
+      _isEditMode = true;
+    }
+    isInitialized = true;
     notifyListeners();
   }
 
-  Future<BodyParametersModel> getBodyParameters() async {
-    final bodyParameters = await repository.getBodyParameter();
-    return bodyParameters;
+  Future<void> saveBodyParameters() async {
+    await repository.setBodyParameters(
+      BodyParametersModel(
+        weight: _weight,
+        height: _height,
+        fatPercentage: _fatPercentage,
+        calories: _calories,
+        water: _water,
+      ),
+    );
+    _isEditMode = false;
+    notifyListeners();
   }
 
-  // void setWeight(double value) {
-  //   weight = value;
-  //   _preferences.setDouble('weight', value);
-  //   notifyListeners();
-  // }
+  void clearBodyParameters() {
+    _weight = null;
+    _height = null;
+    _fatPercentage = null;
+    _calories = null;
+    _water = null;
+    _isEditMode = true;
+    notifyListeners();
+  }
 
-  // void setHeight(double value) {
-  //   height = value;
-  //   _preferences.setDouble('height', value);
-  //   notifyListeners();
-  // }
+  bool _isEditMode = false;
 
-  // void setFatPercentage(double value) {
-  //   fatPercentage = value;
-  //   _preferences.setDouble('fatPercentage', value);
-  //   notifyListeners();
-  // }
+  bool get isEditMode => _isEditMode;
+  void setEditMode(bool value) {
+    _isEditMode = value;
+    notifyListeners();
+  }
 
-  // void setCalories(double value) {
-  //   calories = value;
-  //   _preferences.setDouble('calories', value);
-  //   notifyListeners();
-  // }
+  double? _weight;
 
-  // void setWater(double value) {
-  //   water = value;
-  //   _preferences.setDouble('water', value);
-  //   notifyListeners();
-  // }
+  double? get weight => _weight;
+
+  void setWeight(double? value) {
+    _weight = value;
+    notifyListeners();
+  }
+
+  int? _height;
+
+  int? get height => _height;
+
+  void setHeight(int? value) {
+    _height = value;
+    notifyListeners();
+  }
+
+  int? _fatPercentage;
+
+  int? get fatPercentage => _fatPercentage;
+
+  void setFatPercentage(int? value) {
+    _fatPercentage = value;
+    notifyListeners();
+  }
+
+  int? _calories;
+
+  int? get calories => _calories;
+
+  void setCalories(int? value) {
+    _calories = value;
+    notifyListeners();
+  }
+
+  int? _water;
+
+  int? get water => _water;
+
+  void setWater(int? value) {
+    _water = value;
+    notifyListeners();
+  }
 }
