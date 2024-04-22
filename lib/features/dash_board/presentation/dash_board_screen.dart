@@ -1,4 +1,6 @@
 import 'package:calorie_counter/features/body_parameters/presentation/body_parameters_card.dart';
+import 'package:calorie_counter/features/water_consuming/presentation/water_consuming_card.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class DashBoardScreen extends StatelessWidget {
@@ -8,7 +10,19 @@ class DashBoardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Сегодня'),
+        title: Row(
+          children: [
+            const Text('Сегодня'),
+            SizedBox(
+              width: 40,
+              child: IconButton(
+                onPressed: () {},
+                icon: const Icon(CupertinoIcons.arrowtriangle_down_fill),
+                iconSize: 14,
+              ),
+            ),
+          ],
+        ),
         actions: [
           IconButton(
             icon: Image.asset('assets/icons/topics_icon.png'),
@@ -27,6 +41,7 @@ class DashBoardScreen extends StatelessWidget {
             sliver: SliverList(
               delegate: SliverChildListDelegate(
                 [
+                  const WaterConsumingCard(),
                   const BodyParametersCard(),
                 ],
               ),

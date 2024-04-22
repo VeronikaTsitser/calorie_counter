@@ -21,6 +21,7 @@ ThemeData get lightTheme => ThemeData(
         backgroundColor: Colors.white,
         elevation: 0,
         titleTextStyle: AppTextStyle.s20w700,
+        iconTheme: IconThemeData(color: AppColors.black),
       ),
     );
 
@@ -30,6 +31,7 @@ abstract final class AppColors {
   static const greyContainer = Color.fromRGBO(245, 245, 245, 1);
   static const destructiveRed = Color.fromRGBO(255, 59, 48, 1);
 
+  static const black = Colors.black;
   static final hint = Colors.black.withOpacity(0.6);
 }
 
@@ -43,7 +45,7 @@ abstract final class AppTextTheme {
 }
 
 abstract final class AppTextStyle {
-  static const s20w700 = TextStyle(fontSize: 20, fontWeight: FontWeight.w700, height: 1.2);
+  static const s20w700 = TextStyle(fontSize: 20, fontWeight: FontWeight.w700, height: 1.2, color: AppColors.black);
   static const s16w600 = TextStyle(fontSize: 16, fontWeight: FontWeight.w600, height: 1.25);
   static const s16w400 = TextStyle(fontSize: 16, fontWeight: FontWeight.w400, height: 1.25);
   static const s12w400 = TextStyle(fontSize: 12, fontWeight: FontWeight.w400, height: 1.33);

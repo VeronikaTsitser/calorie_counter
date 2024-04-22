@@ -1,6 +1,6 @@
-import 'package:calorie_counter/core/presentation/base_app_container.dart';
 import 'package:calorie_counter/core/presentation/pop_ups.dart';
 import 'package:calorie_counter/core/presentation/theme.dart';
+import 'package:calorie_counter/core/presentation/widgets/base_app_container.dart';
 import 'package:calorie_counter/features/body_parameters/logic/body_parameters_notifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
