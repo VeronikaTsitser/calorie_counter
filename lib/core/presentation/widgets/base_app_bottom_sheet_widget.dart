@@ -3,8 +3,8 @@ import 'package:calorie_counter/core/presentation/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class AppBaseBottomSheetWidget extends StatelessWidget {
-  const AppBaseBottomSheetWidget({
+class BaseAppBottomSheetWidget extends StatelessWidget {
+  const BaseAppBottomSheetWidget({
     super.key,
     required this.title,
     this.onTap,
