@@ -12,7 +12,7 @@ ThemeData get lightTheme => ThemeData(
           minimumSize: const Size(double.infinity, 46),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           padding: const EdgeInsets.symmetric(vertical: 13),
-          textStyle: AppTextStyle.s20w700.copyWith(color: Colors.white),
+          textStyle: AppTextStyle.s16w600.copyWith(color: Colors.white),
           backgroundColor: AppColors.primary,
         ),
       ),
