@@ -1,9 +1,7 @@
-import 'package:calorie_counter/core/presentation/theme.dart';
-import 'package:calorie_counter/core/presentation/widgets/app_base_bottom_sheet_widget.dart';
-import 'package:calorie_counter/core/presentation/widgets/time_container.dart';
+import 'package:calorie_counter/core/presentation/widgets/base_app_bottom_sheet_widget.dart';
+import 'package:calorie_counter/core/presentation/widgets/base_app_input_widget.dart';
 import 'package:calorie_counter/features/water_consuming/domain/models/water_consuming_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class WaterConsumingBottomSheetWidget extends StatefulWidget {
   const WaterConsumingBottomSheetWidget({
@@ -22,7 +20,7 @@ class _WaterConsumingBottomSheetWidgetState extends State<WaterConsumingBottomSh
 
   @override
   Widget build(BuildContext context) {
-    return AppBaseBottomSheetWidget(
+    return BaseAppBottomSheetWidget(
       title: 'Добавить употребление жидкости',
       onTap: () {
         if (_formKey.currentState!.validate()) {
@@ -39,7 +37,7 @@ class _WaterConsumingBottomSheetWidgetState extends State<WaterConsumingBottomSh
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          _WaterConsumingTextField(
+          BaseAppInputWidget(
             keyboardType: TextInputType.text,
             label: 'Название',
             onChanged: (value) {
@@ -48,7 +46,7 @@ class _WaterConsumingBottomSheetWidgetState extends State<WaterConsumingBottomSh
               }
             },
           ),
-          _WaterConsumingTextField(
+          BaseAppInputWidget(
             label: 'Время приема',
             onTimeChanged: (value) {
               if (value != null) {
@@ -56,7 +54,7 @@ class _WaterConsumingBottomSheetWidgetState extends State<WaterConsumingBottomSh
               }
             },
           ),
-          _WaterConsumingTextField(
+          BaseAppInputWidget(
             label: 'Объем',
             onChanged: (value) {
               if (value != null) {
@@ -66,60 +64,6 @@ class _WaterConsumingBottomSheetWidgetState extends State<WaterConsumingBottomSh
           ),
         ],
       ),
-    );
-  }
-}
-
-class _WaterConsumingTextField extends StatelessWidget {
-  const _WaterConsumingTextField({
-    required this.label,
-    this.onChanged,
-    this.onTimeChanged,
-    this.keyboardType,
-  });
-  final String label;
-
-  final ValueChanged<String?>? onChanged;
-  final ValueChanged<DateTime?>? onTimeChanged;
-  final TextInputType? keyboardType;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(height: 5),
-        Row(
-          children: [
-            SizedBox(width: 0.3.sw, child: Text(label, style: AppTextStyle.s16w400)),
-            const SizedBox(width: 20),
-            if (onTimeChanged != null)
-              TimeContainer(onChanged: (value) => onTimeChanged!(value))
-            else
-              Flexible(
-                child: TextFormField(
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Введите значение';
-                    }
-                    return null;
-                  },
-                  style: AppTextStyle.s16w400,
-                  decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.symmetric(vertical: 0),
-                    isCollapsed: true,
-                    hintText: 'Введите значение',
-                    hintStyle: AppTextStyle.s16w400.copyWith(color: AppColors.hint),
-                    border: InputBorder.none,
-                  ),
-                  keyboardType: keyboardType ?? TextInputType.number,
-                  onChanged: onChanged,
-                ),
-              ),
-          ],
-        ),
-        const Divider(height: 14),
-      ],
     );
   }
 }
