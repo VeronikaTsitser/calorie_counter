@@ -1,8 +1,10 @@
 import 'package:calorie_counter/features/body_parameters/presentation/body_parameters_card.dart';
 import 'package:calorie_counter/features/calorie_counter/presentation/calorie_counter_card.dart';
+import 'package:calorie_counter/features/statistic/presentation/statistic_card.dart';
 import 'package:calorie_counter/features/water_consuming/presentation/water_consuming_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DashBoardScreen extends StatelessWidget {
   const DashBoardScreen({super.key});
@@ -10,6 +12,14 @@ class DashBoardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          SharedPreferences.getInstance().then((prefs) {
+            prefs.clear();
+          });
+        },
+        child: const Icon(CupertinoIcons.clear),
+      ),
       appBar: AppBar(
         title: Row(
           children: [
@@ -27,24 +37,25 @@ class DashBoardScreen extends StatelessWidget {
         actions: [
           IconButton(
             icon: Image.asset('assets/icons/topics_icon.png'),
-            onPressed: () {},
+            onPressed: () {}, //TODO
           ),
           IconButton(
             icon: Image.asset('assets/icons/settings_icon.png'),
-            onPressed: () {},
+            onPressed: () {}, //TODO
           ),
         ],
       ),
       body: CustomScrollView(
         slivers: [
           SliverPadding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 20).copyWith(bottom: 20),
             sliver: SliverList(
               delegate: SliverChildListDelegate(
                 [
                   const CalorieCounterCard(),
                   const WaterConsumingCard(),
                   const BodyParametersCard(),
+                  const StatisticCard()
                 ],
               ),
             ),
