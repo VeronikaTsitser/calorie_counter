@@ -1,4 +1,5 @@
 import 'package:calorie_counter/features/body_parameters/presentation/body_parameters_card.dart';
+import 'package:calorie_counter/features/calorie_counter/presentation/calorie_counter_card.dart';
 import 'package:calorie_counter/features/water_consuming/presentation/water_consuming_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -41,6 +42,7 @@ class DashBoardScreen extends StatelessWidget {
             sliver: SliverList(
               delegate: SliverChildListDelegate(
                 [
+                  const CalorieCounterCard(),
                   const WaterConsumingCard(),
                   const BodyParametersCard(),
                 ],
