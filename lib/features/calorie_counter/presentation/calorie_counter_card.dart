@@ -4,6 +4,7 @@ import 'package:calorie_counter/core/presentation/widgets/base_app_container.dar
 import 'package:calorie_counter/features/calorie_counter/domain/models/food_consuming_model.dart';
 import 'package:calorie_counter/features/calorie_counter/logic/food_consuming_notifier.dart';
 import 'package:calorie_counter/features/calorie_counter/presentation/widgets/food_consuming_bottom_sheet_widget.dart';
+import 'package:calorie_counter/features/statistic/logic/statistic_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -29,19 +30,25 @@ class CalorieCounterCard extends StatelessWidget {
         ],
         ElevatedButton(
             onPressed: () {
+              final statisticNotifier = context.read<StatisticNotifier>();
+              final foodConsumingNotifier = context.read<FoodConsumingNotifier>();
               showAppModalBottomSheet<FoodConsumingModel>(
                       context: context, child: const FoodConsumingBottomSheetWidget())
-                  .then((value) {
-                if (value != null) {
-                  context.read<FoodConsumingNotifier>().addFoodConsuming(
-                      foodName: value.name,
-                      calories: value.calories,
-                      foodConsumingTime: value.time,
-                      composition: value.composition,
-                      comment: value.comment,
-                      cost: value.cost);
-                }
-              });
+                  .then(
+                (value) {
+                  if (value != null) {
+                    foodConsumingNotifier
+                        .addFoodConsuming(
+                            foodName: value.name,
+                            calories: value.calories,
+                            foodConsumingTime: value.time,
+                            composition: value.composition,
+                            comment: value.comment,
+                            cost: value.cost)
+                        .then((_) => statisticNotifier.getTotalCalories());
+                  }
+                },
+              );
             },
             child: const Text('Добавить прием пищи')),
       ],

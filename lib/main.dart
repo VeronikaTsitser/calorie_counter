@@ -6,6 +6,7 @@ import 'package:calorie_counter/features/calorie_counter/data/food_consuming_rep
 import 'package:calorie_counter/features/calorie_counter/domain/food_consuming_repository.dart';
 import 'package:calorie_counter/features/calorie_counter/logic/food_consuming_notifier.dart';
 import 'package:calorie_counter/features/dash_board/presentation/dash_board_screen.dart';
+import 'package:calorie_counter/features/statistic/logic/statistic_notifier.dart';
 import 'package:calorie_counter/features/water_consuming/data/water_consuming_repository_impl.dart';
 import 'package:calorie_counter/features/water_consuming/domain/water_consuming_repository.dart';
 import 'package:calorie_counter/features/water_consuming/logic/water_consuming_notifier.dart';
@@ -38,6 +39,12 @@ class CalorieCounterApp extends StatelessWidget {
                 create: (context) => BodyParameterNotifier(context.read<BodyParametersRepository>())..init()),
             ChangeNotifierProvider(
                 create: (context) => FoodConsumingNotifier(context.read<FoodConsumingRepository>())..init()),
+            ChangeNotifierProvider(
+              create: (context) => StatisticNotifier(
+                context.read<FoodConsumingRepository>(),
+                context.read<WaterConsumingRepository>(),
+              )..init(),
+            ),
           ],
           child: const DashBoardScreen(),
         ),

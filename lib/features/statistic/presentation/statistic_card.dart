@@ -1,20 +1,23 @@
 import 'package:calorie_counter/core/presentation/theme.dart';
 import 'package:calorie_counter/core/presentation/widgets/base_app_container.dart';
+import 'package:calorie_counter/features/statistic/logic/statistic_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class StatisticCard extends StatelessWidget {
   const StatisticCard({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const BaseAppContainer(
+    final notifier = context.watch<StatisticNotifier>();
+    return BaseAppContainer(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Статистика', style: AppTextStyle.s20w700),
-          SizedBox(height: 12),
-          _StatisticContainer(title: 'Всего калорий', value: 500, measurements: 'ккал'),
-          _StatisticContainer(title: 'Всего жидкости', value: 500, measurements: 'мл', isLast: true),
+          const Text('Статистика', style: AppTextStyle.s20w700),
+          const SizedBox(height: 12),
+          _StatisticContainer(title: 'Всего калорий', value: notifier.totalCalories, measurements: 'ккал'),
+          _StatisticContainer(title: 'Всего жидкости', value: notifier.totalWater, measurements: 'мл', isLast: true),
         ],
       ),
     );

@@ -1,6 +1,7 @@
 import 'package:calorie_counter/core/presentation/bottom_sheets.dart';
 import 'package:calorie_counter/core/presentation/theme.dart';
 import 'package:calorie_counter/core/presentation/widgets/base_app_container.dart';
+import 'package:calorie_counter/features/statistic/logic/statistic_notifier.dart';
 import 'package:calorie_counter/features/water_consuming/domain/models/water_consuming_model.dart';
 import 'package:calorie_counter/features/water_consuming/logic/water_consuming_notifier.dart';
 import 'package:calorie_counter/features/water_consuming/presentation/components/water_consuming_bottom_sheet_widget.dart';
@@ -66,18 +67,23 @@ class _AddWaterConsumingButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () => showAppModalBottomSheet<WaterConsumingModel>(
-                    context: context, child: const WaterConsumingBottomSheetWidget())
-                .then(
-              (value) {
-                if (value != null) {
-                  return context.read<WaterConsumingNotifier>().addWaterConsuming(
-                      drinkName: value.name,
-                      waterConsuming: value.consumedWaterValue,
-                      lastWaterConsumingTime: value.date);
-                }
-              },
-            ),
+        onTap: () {
+          final waterConsumingNotifier = context.read<WaterConsumingNotifier>();
+          final statisticNotifier = context.read<StatisticNotifier>();
+          showAppModalBottomSheet<WaterConsumingModel>(context: context, child: const WaterConsumingBottomSheetWidget())
+              .then(
+            (value) {
+              if (value != null) {
+                return waterConsumingNotifier
+                    .addWaterConsuming(
+                        drinkName: value.name,
+                        waterConsuming: value.consumedWaterValue,
+                        lastWaterConsumingTime: value.date)
+                    .then((_) => statisticNotifier.getTotalWater());
+              }
+            },
+          );
+        },
         child: Image.asset('assets/icons/add_button_icon.png', width: 68));
   }
 }
