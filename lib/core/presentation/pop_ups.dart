@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 
-Future<PopUpAction?> showActionSheet(BuildContext context) {
+Future<PopUpAction?> showAppActionSheet(BuildContext context) {
   return showCupertinoModalPopup(
     context: context,
     builder: (context) => const ActionSheet(),

@@ -35,7 +35,7 @@ class BodyParametersCard extends StatelessWidget {
                   if (!isEditMode)
                     IconButton(
                       onPressed: () {
-                        showActionSheet(context).then((value) {
+                        showAppActionSheet(context).then((value) {
                           if (value == PopUpAction.edit) {
                             context.read<BodyParameterNotifier>().setEditMode(true);
                           }
