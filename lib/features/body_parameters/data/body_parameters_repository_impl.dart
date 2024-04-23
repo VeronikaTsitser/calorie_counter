@@ -9,7 +9,7 @@ class BodyParametersRepositoryImpl implements BodyParametersRepository {
   @override
   Future<BodyParametersModel> getBodyParameter() async {
     final preferences = await SharedPreferences.getInstance();
-    final bodyParameters = preferences.getString('bodyParameters') ?? '';
+    final bodyParameters = preferences.getString('bodyParameters') ?? '{}';
     log('bodyParameters: $bodyParameters');
     return BodyParametersModel.fromJson(jsonDecode(bodyParameters));
   }
