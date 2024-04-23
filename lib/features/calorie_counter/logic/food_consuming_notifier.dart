@@ -13,7 +13,7 @@ class FoodConsumingNotifier extends ChangeNotifier {
 
   Future<void> init() async {
     _foodConsumingList.clear();
-    _foodConsumingList.addAll(await _foodConsumingRepository.getCalorieCounters());
+    _foodConsumingList.addAll(await _foodConsumingRepository.getFoodConsuming());
     notifyListeners();
   }
 
@@ -33,7 +33,7 @@ class FoodConsumingNotifier extends ChangeNotifier {
       comment: comment,
       cost: cost,
     ));
-    await _foodConsumingRepository.setCalorieCounters(_foodConsumingList);
+    await _foodConsumingRepository.setFoodConsuming(_foodConsumingList);
     log('Food consuming added: $foodName');
     notifyListeners();
   }

@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class FoodConsumingRepositoryImpl implements FoodConsumingRepository {
   @override
-  Future<List<FoodConsumingModel>> getCalorieCounters() async {
+  Future<List<FoodConsumingModel>> getFoodConsuming() async {
     final pref = await SharedPreferences.getInstance();
     final foodConsumingList = pref.getStringList('foodConsumingList') ?? [];
     log('foodConsumingList: $foodConsumingList');
@@ -15,7 +15,7 @@ class FoodConsumingRepositoryImpl implements FoodConsumingRepository {
   }
 
   @override
-  Future<void> setCalorieCounters(List<FoodConsumingModel> foodConsumingList) async {
+  Future<void> setFoodConsuming(List<FoodConsumingModel> foodConsumingList) async {
     final pref = await SharedPreferences.getInstance();
     await pref.setStringList('foodConsumingList', foodConsumingList.map((e) => jsonEncode(e)).toList());
   }
