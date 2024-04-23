@@ -20,7 +20,7 @@ class CalorieCounterCard extends StatelessWidget {
         const Text('Подсчет калорий', style: AppTextStyle.s20w700),
         const SizedBox(height: 20),
         if (notifier.foodConsumingList.isNotEmpty) ...[
-          ...notifier.foodConsumingList.map((e) => FoodConsumingContainer(foodName: e.name, calories: e.calories)),
+          ...notifier.foodConsumingList.map((e) => _FoodConsumingContainer(foodName: e.name, calories: e.calories)),
           const SizedBox(height: 8),
         ],
         if (notifier.foodConsumingList.isEmpty) ...[
@@ -49,8 +49,8 @@ class CalorieCounterCard extends StatelessWidget {
   }
 }
 
-class FoodConsumingContainer extends StatelessWidget {
-  const FoodConsumingContainer({super.key, required this.foodName, required this.calories});
+class _FoodConsumingContainer extends StatelessWidget {
+  const _FoodConsumingContainer({required this.foodName, required this.calories});
   final String foodName;
   final int calories;
 

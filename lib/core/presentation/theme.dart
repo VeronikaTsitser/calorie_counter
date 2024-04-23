@@ -14,6 +14,7 @@ ThemeData get lightTheme => ThemeData(
           padding: const EdgeInsets.symmetric(vertical: 13),
           textStyle: AppTextStyle.s16w600.copyWith(color: Colors.white),
           backgroundColor: AppColors.primary,
+          elevation: 0,
         ),
       ),
       appBarTheme: const AppBarTheme(
