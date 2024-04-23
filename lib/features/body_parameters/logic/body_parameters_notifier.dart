@@ -1,9 +1,9 @@
-import 'package:calorie_counter/features/body_parameters/data/body_parameters_repository_impl.dart';
+import 'package:calorie_counter/features/body_parameters/domain/body_parameters_repository.dart';
 import 'package:calorie_counter/features/body_parameters/domain/models/body_parameters_model.dart';
 import 'package:flutter/material.dart';
 
 class BodyParameterNotifier extends ChangeNotifier {
-  final BodyParametersRepositoryImpl bodyParametersRepository;
+  final BodyParametersRepository bodyParametersRepository;
   bool isInitialized = false;
 
   BodyParameterNotifier(this.bodyParametersRepository);
