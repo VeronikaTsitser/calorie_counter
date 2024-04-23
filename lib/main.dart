@@ -2,6 +2,9 @@ import 'package:calorie_counter/core/presentation/theme.dart';
 import 'package:calorie_counter/features/body_parameters/data/body_parameters_repository_impl.dart';
 import 'package:calorie_counter/features/body_parameters/domain/body_parameters_repository.dart';
 import 'package:calorie_counter/features/body_parameters/logic/body_parameters_notifier.dart';
+import 'package:calorie_counter/features/calorie_counter/data/food_consuming_repository_impl.dart';
+import 'package:calorie_counter/features/calorie_counter/domain/food_consuming_repository.dart';
+import 'package:calorie_counter/features/calorie_counter/logic/food_consuming_notifier.dart';
 import 'package:calorie_counter/features/dash_board/presentation/dash_board_screen.dart';
 import 'package:calorie_counter/features/water_consuming/data/water_consuming_repository_impl.dart';
 import 'package:calorie_counter/features/water_consuming/domain/water_consuming_repository.dart';
@@ -28,10 +31,13 @@ class CalorieCounterApp extends StatelessWidget {
           providers: [
             RepositoryProvider<BodyParametersRepository>(create: (context) => BodyParametersRepositoryImpl()),
             RepositoryProvider<WaterConsumingRepository>(create: (context) => WaterConsumingRepositoryImpl()),
+            RepositoryProvider<FoodConsumingRepository>(create: (context) => FoodConsumingRepositoryImpl()),
             ChangeNotifierProvider(
                 create: (context) => WaterConsumingNotifier(context.read<WaterConsumingRepository>())..init()),
             ChangeNotifierProvider(
                 create: (context) => BodyParameterNotifier(context.read<BodyParametersRepository>())..init()),
+            ChangeNotifierProvider(
+                create: (context) => FoodConsumingNotifier(context.read<FoodConsumingRepository>())..init()),
           ],
           child: const DashBoardScreen(),
         ),
