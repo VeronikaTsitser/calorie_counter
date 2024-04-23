@@ -19,11 +19,14 @@ class CalorieCounterCard extends StatelessWidget {
       children: [
         const Text('Подсчет калорий', style: AppTextStyle.s20w700),
         const SizedBox(height: 20),
-        if (notifier.foodConsumingList.isNotEmpty)
+        if (notifier.foodConsumingList.isNotEmpty) ...[
           ...notifier.foodConsumingList.map((e) => FoodConsumingContainer(foodName: e.name, calories: e.calories)),
-        if (notifier.foodConsumingList.isEmpty)
+          const SizedBox(height: 8),
+        ],
+        if (notifier.foodConsumingList.isEmpty) ...[
           const Center(child: Text('Добавьте информацию о питании', style: AppTextStyle.s16w400)),
-        const SizedBox(height: 12),
+          const SizedBox(height: 20),
+        ],
         ElevatedButton(
             onPressed: () {
               showAppModalBottomSheet<FoodConsumingModel>(
