@@ -99,7 +99,7 @@ class FoodConsumingDetailsScreen extends StatelessWidget {
                         measurement: 'р.',
                         onChanged: (value) {
                           if (value != null) {
-                            notifier.setCost(double.parse(value));
+                            notifier.setCost(double.tryParse(value));
                           }
                         },
                       ),
