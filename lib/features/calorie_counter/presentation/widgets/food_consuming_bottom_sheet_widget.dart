@@ -11,7 +11,7 @@ class FoodConsumingBottomSheetWidget extends StatefulWidget {
 }
 
 class _FoodConsumingBottomSheetWidgetState extends State<FoodConsumingBottomSheetWidget> {
-  final formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   String _foodName = '';
   int _calories = 0;
   DateTime _time = DateTime.now();
@@ -23,7 +23,7 @@ class _FoodConsumingBottomSheetWidgetState extends State<FoodConsumingBottomShee
   Widget build(BuildContext context) {
     return BaseAppBottomSheetWidget(
       onTap: () {
-        if (formKey.currentState!.validate()) {
+        if (_formKey.currentState!.validate()) {
           Navigator.pop(
             context,
             FoodConsumingModel(
@@ -37,7 +37,7 @@ class _FoodConsumingBottomSheetWidgetState extends State<FoodConsumingBottomShee
         }
       },
       title: 'Добавление приёма пищи',
-      formKey: formKey,
+      formKey: _formKey,
       child: Column(
         children: [
           BaseAppInputWidget(
@@ -55,7 +55,10 @@ class _FoodConsumingBottomSheetWidgetState extends State<FoodConsumingBottomShee
             keyboardType: TextInputType.number,
             onChanged: (value) {
               if (value != null) {
-                _calories = int.parse(value);
+                final getCalories = int.tryParse(value);
+                if (getCalories != null) {
+                  _calories = getCalories;
+                }
               }
             },
           ),
@@ -85,9 +88,7 @@ class _FoodConsumingBottomSheetWidgetState extends State<FoodConsumingBottomShee
               label: 'Стоимость',
               onChanged: (value) {
                 if (value != null) {
-                  _cost = double.parse(value);
-                } else {
-                  _cost = null;
+                  _cost = double.tryParse(value);
                 }
               }),
         ],

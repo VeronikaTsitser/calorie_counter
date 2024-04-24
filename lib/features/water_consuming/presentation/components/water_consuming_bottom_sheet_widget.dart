@@ -62,7 +62,10 @@ class _WaterConsumingBottomSheetWidgetState extends State<WaterConsumingBottomSh
             keyboardType: TextInputType.number,
             onChanged: (value) {
               if (value != null) {
-                _waterConsuming = int.parse(value);
+                final getWater = int.tryParse(value);
+                if (getWater != null) {
+                  _waterConsuming = getWater;
+                }
               }
             },
           ),
