@@ -21,6 +21,7 @@ dependencies:
   flutter_screenutil: ^5.9.0
   device_preview: ^1.1.0
   auto_size_text: ^3.0.0
+  auto_route: ^8.1.2
   intl: any
 
 dev_dependencies:
@@ -30,6 +31,7 @@ dev_dependencies:
   freezed: 2.5.2
   json_serializable: 6.7.1
   build_runner: 2.4.9
+  auto_route_generator: ^8.0.0
 
 
 flutter:

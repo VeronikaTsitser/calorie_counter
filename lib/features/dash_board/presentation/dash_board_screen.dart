@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:calorie_counter/features/body_parameters/presentation/body_parameters_card.dart';
 import 'package:calorie_counter/features/calorie_counter/presentation/calorie_counter_card.dart';
 import 'package:calorie_counter/features/statistic/presentation/statistic_card.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+@RoutePage()
 class DashBoardScreen extends StatelessWidget {
   const DashBoardScreen({super.key});
 
