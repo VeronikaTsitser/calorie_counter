@@ -41,8 +41,8 @@ class _FoodConsumingBottomSheetWidgetState extends State<FoodConsumingBottomShee
       child: Column(
         children: [
           BaseAppInputWidget(
+            isEditMode: true,
             label: 'Название',
-            keyboardType: TextInputType.text,
             onChanged: (value) {
               if (value != null) {
                 _foodName = value;
@@ -50,34 +50,45 @@ class _FoodConsumingBottomSheetWidgetState extends State<FoodConsumingBottomShee
             },
           ),
           BaseAppInputWidget(
+            isEditMode: true,
             label: 'Количество калорий',
+            keyboardType: TextInputType.number,
             onChanged: (value) {
               if (value != null) {
                 _calories = int.parse(value);
               }
             },
           ),
-          BaseAppInputWidget(
+          BaseAppTimeInputWidget(
+              time: _time,
+              isEditMode: true,
               label: 'Время приёма пищи',
               onTimeChanged: (value) {
                 if (value != null) {
                   _time = value;
+                  setState(() {});
                 }
               }),
           BaseAppNotRequiredInputWidget(
+            isEditMode: true,
             label: 'Состав',
-            keyboardType: TextInputType.text,
             onChanged: (value) => _composition = value,
           ),
           BaseAppNotRequiredInputWidget(
+            isEditMode: true,
             label: 'Комментарий',
-            keyboardType: TextInputType.text,
             onChanged: (value) => _comment = value,
           ),
           BaseAppNotRequiredInputWidget(
+              isEditMode: true,
+              keyboardType: TextInputType.number,
               label: 'Стоимость',
               onChanged: (value) {
-                if (value != null) _cost = double.parse(value);
+                if (value != null) {
+                  _cost = double.parse(value);
+                } else {
+                  _cost = null;
+                }
               }),
         ],
       ),

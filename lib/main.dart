@@ -19,12 +19,24 @@ import 'package:provider/provider.dart';
 
 void main() => runApp(DevicePreview(enabled: kDebugMode, builder: (context) => const CalorieCounterApp()));
 
-class CalorieCounterApp extends StatelessWidget {
+class CalorieCounterApp extends StatefulWidget {
   const CalorieCounterApp({super.key});
 
   @override
+  State<CalorieCounterApp> createState() => _CalorieCounterAppState();
+}
+
+class _CalorieCounterAppState extends State<CalorieCounterApp> {
+  final _appRouter = AppRouter();
+
+  @override
+  void dispose() {
+    _appRouter.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final appRouter = AppRouter();
     return ScreenUtilInit(
       designSize: const Size(393, 852),
       child: MultiProvider(
@@ -46,7 +58,7 @@ class CalorieCounterApp extends StatelessWidget {
           ),
         ],
         child: MaterialApp.router(
-          routerConfig: appRouter.config(),
+          routerConfig: _appRouter.config(),
           theme: lightTheme,
         ),
       ),

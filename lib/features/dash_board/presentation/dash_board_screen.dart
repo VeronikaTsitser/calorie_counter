@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:calorie_counter/core/presentation/theme.dart';
 import 'package:calorie_counter/features/body_parameters/presentation/body_parameters_card.dart';
 import 'package:calorie_counter/features/calorie_counter/presentation/calorie_counter_card.dart';
 import 'package:calorie_counter/features/statistic/presentation/statistic_card.dart';
@@ -30,7 +31,7 @@ class DashBoardScreen extends StatelessWidget {
               width: 40,
               child: IconButton(
                 onPressed: () {},
-                icon: const Icon(CupertinoIcons.arrowtriangle_down_fill),
+                icon: const Icon(CupertinoIcons.arrowtriangle_down_fill, color: AppColors.black),
                 iconSize: 14,
               ),
             ),

@@ -10,6 +10,18 @@ class FoodConsumingNotifier extends ChangeNotifier {
 
   final List<FoodConsumingModel> _foodConsumingList = [];
   List<FoodConsumingModel> get foodConsumingList => _foodConsumingList;
+  void setFoodConsumingList(List<FoodConsumingModel> value) {
+    _foodConsumingList.clear();
+    _foodConsumingList.addAll(value);
+    notifyListeners();
+  }
+
+  bool _isEditMode = false;
+  bool get isEditMode => _isEditMode;
+  void setEditMode(bool value) async {
+    _isEditMode = value;
+    notifyListeners();
+  }
 
   Future<void> init() async {
     _foodConsumingList.clear();
@@ -35,6 +47,80 @@ class FoodConsumingNotifier extends ChangeNotifier {
     ));
     await _foodConsumingRepository.setFoodConsuming(_foodConsumingList);
     log('Food consuming added: $foodName');
+    notifyListeners();
+  }
+
+  DateTime _id = DateTime.now();
+
+  String _title = '';
+  String get title => _title;
+  void setTitle(String value) {
+    _title = value;
+    notifyListeners();
+  }
+
+  int _calories = 0;
+  int get calories => _calories;
+  void setCalories(int value) {
+    _calories = value;
+    notifyListeners();
+  }
+
+  DateTime _foodConsumingTime = DateTime.now();
+  DateTime get foodConsumingTime => _foodConsumingTime;
+  void setFoodConsumingTime(DateTime value) {
+    _foodConsumingTime = value;
+    notifyListeners();
+  }
+
+  String? _composition = '';
+  String? get composition => _composition;
+  void setComposition(String? value) {
+    _composition = value;
+    notifyListeners();
+  }
+
+  String? _comment = '';
+  String? get comment => _comment;
+  void setComment(String? value) {
+    _comment = value;
+    notifyListeners();
+  }
+
+  double? _cost = 0.0;
+  double? get cost => _cost;
+  void setCost(double? value) {
+    _cost = value;
+    notifyListeners();
+  }
+
+  Future<void> getFoodConsumingByTime(DateTime time) async {
+    final foodConsumingList = await _foodConsumingRepository.getFoodConsuming();
+    final foodConsuming = foodConsumingList.firstWhere((element) => element.time == time);
+    _title = foodConsuming.name;
+    _calories = foodConsuming.calories;
+    _foodConsumingTime = foodConsuming.time;
+    _composition = foodConsuming.composition;
+    _comment = foodConsuming.comment;
+    _cost = foodConsuming.cost;
+    _id = foodConsuming.time;
+    notifyListeners();
+  }
+
+  Future<void> updateFoodConsuming() async {
+    FoodConsumingModel foodConsuming = FoodConsumingModel(
+      name: _title,
+      calories: _calories,
+      time: _foodConsumingTime,
+      composition: _composition,
+      comment: _comment,
+      cost: _cost,
+    );
+    final index = _foodConsumingList.indexWhere((element) => element.time == _id);
+    _foodConsumingList[index] = foodConsuming;
+    await _foodConsumingRepository.setFoodConsuming(_foodConsumingList);
+    log('Food consuming updated: $_title');
+    setEditMode(false);
     notifyListeners();
   }
 }

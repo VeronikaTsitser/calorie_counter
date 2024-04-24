@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:calorie_counter/core/presentation/bottom_sheets.dart';
 import 'package:calorie_counter/core/presentation/theme.dart';
 import 'package:calorie_counter/core/presentation/widgets/base_app_container.dart';
+import 'package:calorie_counter/core/router/router.dart';
 import 'package:calorie_counter/features/calorie_counter/domain/models/food_consuming_model.dart';
 import 'package:calorie_counter/features/calorie_counter/logic/food_consuming_notifier.dart';
 import 'package:calorie_counter/features/calorie_counter/presentation/widgets/food_consuming_bottom_sheet_widget.dart';
@@ -21,7 +23,8 @@ class CalorieCounterCard extends StatelessWidget {
         const Text('Подсчет калорий', style: AppTextStyle.s20w700),
         const SizedBox(height: 20),
         if (notifier.foodConsumingList.isNotEmpty) ...[
-          ...notifier.foodConsumingList.map((e) => _FoodConsumingContainer(foodName: e.name, calories: e.calories)),
+          ...notifier.foodConsumingList
+              .map((e) => _FoodConsumingContainer(foodName: e.name, calories: e.calories, foodConsumingTime: e.time)),
           const SizedBox(height: 8),
         ],
         if (notifier.foodConsumingList.isEmpty) ...[
@@ -57,14 +60,18 @@ class CalorieCounterCard extends StatelessWidget {
 }
 
 class _FoodConsumingContainer extends StatelessWidget {
-  const _FoodConsumingContainer({required this.foodName, required this.calories});
+  const _FoodConsumingContainer({required this.foodName, required this.calories, required this.foodConsumingTime});
   final String foodName;
   final int calories;
+  final DateTime foodConsumingTime;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        context.read<FoodConsumingNotifier>().getFoodConsumingByTime(foodConsumingTime);
+        AutoRouter.of(context).push(const FoodConsumingDetailsRoute());
+      },
       child: Container(
         margin: const EdgeInsets.only(bottom: 12),
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),

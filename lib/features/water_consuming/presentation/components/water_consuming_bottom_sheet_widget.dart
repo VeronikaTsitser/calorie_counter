@@ -38,7 +38,7 @@ class _WaterConsumingBottomSheetWidgetState extends State<WaterConsumingBottomSh
         mainAxisSize: MainAxisSize.min,
         children: [
           BaseAppInputWidget(
-            keyboardType: TextInputType.text,
+            isEditMode: true,
             label: 'Название',
             onChanged: (value) {
               if (value != null) {
@@ -46,7 +46,9 @@ class _WaterConsumingBottomSheetWidgetState extends State<WaterConsumingBottomSh
               }
             },
           ),
-          BaseAppInputWidget(
+          BaseAppTimeInputWidget(
+            time: _lastWaterConsumingTime,
+            isEditMode: true,
             label: 'Время приема',
             onTimeChanged: (value) {
               if (value != null) {
@@ -55,7 +57,9 @@ class _WaterConsumingBottomSheetWidgetState extends State<WaterConsumingBottomSh
             },
           ),
           BaseAppInputWidget(
+            isEditMode: true,
             label: 'Объем',
+            keyboardType: TextInputType.number,
             onChanged: (value) {
               if (value != null) {
                 _waterConsuming = int.parse(value);

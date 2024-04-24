@@ -22,7 +22,7 @@ ThemeData get lightTheme => ThemeData(
         backgroundColor: Colors.white,
         elevation: 0,
         titleTextStyle: AppTextStyle.s20w700,
-        iconTheme: IconThemeData(color: AppColors.black),
+        iconTheme: IconThemeData(color: AppColors.primary),
       ),
     );
 
