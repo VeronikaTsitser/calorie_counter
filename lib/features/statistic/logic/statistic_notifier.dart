@@ -2,9 +2,7 @@ import 'dart:developer';
 
 import 'package:calorie_counter/core/utils/utils.dart';
 import 'package:calorie_counter/features/calorie_counter/domain/food_consuming_repository.dart';
-import 'package:calorie_counter/features/calorie_counter/domain/models/food_consuming_model.dart';
 import 'package:calorie_counter/features/statistic/domain/enum.dart';
-import 'package:calorie_counter/features/water_consuming/domain/models/water_consuming_model.dart';
 import 'package:calorie_counter/features/water_consuming/domain/water_consuming_repository.dart';
 import 'package:flutter/material.dart';
 
@@ -34,42 +32,43 @@ class StatisticNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> saveWaterAndFood() async {
-    await _foodConsumingRepository.setFoodConsuming([
-      FoodConsumingModel(
-        name: 'Картошка',
-        calories: 100,
-        time: DateTime(2024, 3, 28),
-      ),
-      FoodConsumingModel(
-        name: 'Морковка',
-        calories: 50,
-        time: DateTime(2024, 4, 20),
-      ),
-      FoodConsumingModel(
-        name: 'Салат',
-        calories: 30,
-        time: DateTime(2024, 4, 24, 7),
-      ),
-    ]);
-    await _waterConsumingRepository.setWaterConsuming([
-      WaterConsumingModel(
-        name: 'Вода',
-        consumedWaterValue: 200,
-        time: DateTime(2024, 3, 28),
-      ),
-      WaterConsumingModel(
-        name: 'Вода',
-        consumedWaterValue: 200,
-        time: DateTime(2024, 4, 20),
-      ),
-      WaterConsumingModel(
-        name: 'Вода',
-        consumedWaterValue: 200,
-        time: DateTime(2024, 4, 24, 7),
-      ),
-    ]);
-  }
+  // Future<void> saveWaterAndFood() async {
+  //   await _foodConsumingRepository.setFoodConsuming([
+  //     FoodConsumingModel(
+
+  //       name: 'Картошка',
+  //       calories: 100,
+  //       time: DateTime(2024, 3, 28),
+  //     ),
+  //     FoodConsumingModel(
+  //       name: 'Морковка',
+  //       calories: 50,
+  //       time: DateTime(2024, 4, 20),
+  //     ),
+  //     FoodConsumingModel(
+  //       name: 'Салат',
+  //       calories: 30,
+  //       time: DateTime(2024, 4, 24, 7),
+  //     ),
+  //   ]);
+  //   await _waterConsumingRepository.setWaterConsuming([
+  //     WaterConsumingModel(
+  //       name: 'Вода',
+  //       consumedWaterValue: 200,
+  //       time: DateTime(2024, 3, 28),
+  //     ),
+  //     WaterConsumingModel(
+  //       name: 'Вода',
+  //       consumedWaterValue: 200,
+  //       time: DateTime(2024, 4, 20),
+  //     ),
+  //     WaterConsumingModel(
+  //       name: 'Вода',
+  //       consumedWaterValue: 200,
+  //       time: DateTime(2024, 4, 24, 7),
+  //     ),
+  //   ]);
+  // }
 
   Future<void> getTotalCalories() async {
     final consumedFood = await _foodConsumingRepository.getFoodConsuming();

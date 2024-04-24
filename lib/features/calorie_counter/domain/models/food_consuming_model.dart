@@ -6,6 +6,7 @@ part 'food_consuming_model.g.dart';
 @freezed
 class FoodConsumingModel with _$FoodConsumingModel {
   factory FoodConsumingModel({
+    required int id,
     required String name,
     required int calories,
     required DateTime time,

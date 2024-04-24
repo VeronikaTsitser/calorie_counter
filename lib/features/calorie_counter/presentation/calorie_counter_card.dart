@@ -24,7 +24,7 @@ class CalorieCounterCard extends StatelessWidget {
         const SizedBox(height: 20),
         if (notifier.foodConsumingList.isNotEmpty) ...[
           ...notifier.foodConsumingList
-              .map((e) => _FoodConsumingContainer(foodName: e.name, calories: e.calories, foodConsumingTime: e.time)),
+              .map((e) => _FoodConsumingContainer(foodName: e.name, calories: e.calories, id: e.id)),
           const SizedBox(height: 8),
         ],
         if (notifier.foodConsumingList.isEmpty) ...[
@@ -42,6 +42,7 @@ class CalorieCounterCard extends StatelessWidget {
                   if (value != null) {
                     foodConsumingNotifier
                         .addFoodConsuming(
+                            id: value.id,
                             foodName: value.name,
                             calories: value.calories,
                             foodConsumingTime: value.time,
@@ -60,16 +61,16 @@ class CalorieCounterCard extends StatelessWidget {
 }
 
 class _FoodConsumingContainer extends StatelessWidget {
-  const _FoodConsumingContainer({required this.foodName, required this.calories, required this.foodConsumingTime});
+  const _FoodConsumingContainer({required this.foodName, required this.calories, required this.id});
   final String foodName;
   final int calories;
-  final DateTime foodConsumingTime;
+  final int id;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.read<FoodConsumingNotifier>().getFoodConsumingByTime(foodConsumingTime);
+        context.read<FoodConsumingNotifier>().getFoodConsumingById(id);
         AutoRouter.of(context).push(const FoodConsumingDetailsRoute());
       },
       child: Container(

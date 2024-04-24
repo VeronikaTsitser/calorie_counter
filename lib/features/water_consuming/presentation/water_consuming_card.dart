@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:calorie_counter/core/presentation/bottom_sheets.dart';
 import 'package:calorie_counter/core/presentation/theme.dart';
 import 'package:calorie_counter/core/presentation/widgets/base_app_container.dart';
+import 'package:calorie_counter/core/router/router.dart';
 import 'package:calorie_counter/features/statistic/logic/statistic_notifier.dart';
 import 'package:calorie_counter/features/water_consuming/domain/models/water_consuming_model.dart';
 import 'package:calorie_counter/features/water_consuming/logic/water_consuming_notifier.dart';
@@ -43,19 +45,23 @@ class _ConsumedWaterContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 68,
-      height: 68,
-      padding: const EdgeInsets.only(top: 6),
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), color: AppColors.primaryBg),
-      child: Column(
-        children: [
-          Image.asset('assets/icons/liquid_icon.png', width: 40),
-          const SizedBox(width: 12),
-          FittedBox(
-            child: Text('$consumedWaterValue мл', style: AppTextStyle.s12w400.copyWith(color: AppColors.primary)),
-          ),
-        ],
+    return GestureDetector(
+      onTap: () => AutoRouter.of(context).push(
+          const WaterConsumingDetailsRoute()), //TODO добавить получение конкретного напитка или передавать в конструкторе
+      child: Container(
+        width: 68,
+        height: 68,
+        padding: const EdgeInsets.only(top: 6),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), color: AppColors.primaryBg),
+        child: Column(
+          children: [
+            Image.asset('assets/icons/liquid_icon.png', width: 40),
+            const SizedBox(width: 12),
+            FittedBox(
+              child: Text('$consumedWaterValue мл', style: AppTextStyle.s12w400.copyWith(color: AppColors.primary)),
+            ),
+          ],
+        ),
       ),
     );
   }

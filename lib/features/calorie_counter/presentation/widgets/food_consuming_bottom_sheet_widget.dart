@@ -27,12 +27,14 @@ class _FoodConsumingBottomSheetWidgetState extends State<FoodConsumingBottomShee
           Navigator.pop(
             context,
             FoodConsumingModel(
-                name: _foodName,
-                calories: _calories,
-                time: _time,
-                comment: _comment,
-                composition: _composition,
-                cost: _cost),
+              id: DateTime.now().millisecondsSinceEpoch,
+              name: _foodName,
+              calories: _calories,
+              time: _time,
+              comment: _comment,
+              composition: _composition,
+              cost: _cost,
+            ),
           );
         }
       },

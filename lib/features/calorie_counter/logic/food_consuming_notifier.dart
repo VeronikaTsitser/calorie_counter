@@ -30,6 +30,7 @@ class FoodConsumingNotifier extends ChangeNotifier {
   }
 
   Future<void> addFoodConsuming({
+    required int id,
     required String foodName,
     required int calories,
     required DateTime foodConsumingTime,
@@ -38,6 +39,7 @@ class FoodConsumingNotifier extends ChangeNotifier {
     double? cost,
   }) async {
     _foodConsumingList.add(FoodConsumingModel(
+      id: id,
       name: foodName,
       calories: calories,
       time: foodConsumingTime,
@@ -50,7 +52,7 @@ class FoodConsumingNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  DateTime _id = DateTime.now();
+  int _id = 0;
 
   String _title = '';
   String get title => _title;
@@ -94,21 +96,22 @@ class FoodConsumingNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> getFoodConsumingByTime(DateTime time) async {
+  Future<void> getFoodConsumingById(int id) async {
     final foodConsumingList = await _foodConsumingRepository.getFoodConsuming();
-    final foodConsuming = foodConsumingList.firstWhere((element) => element.time == time);
+    final foodConsuming = foodConsumingList.firstWhere((element) => element.id == id);
     _title = foodConsuming.name;
     _calories = foodConsuming.calories;
     _foodConsumingTime = foodConsuming.time;
     _composition = foodConsuming.composition;
     _comment = foodConsuming.comment;
     _cost = foodConsuming.cost;
-    _id = foodConsuming.time;
+    _id = foodConsuming.id;
     notifyListeners();
   }
 
   Future<void> updateFoodConsuming() async {
     FoodConsumingModel foodConsuming = FoodConsumingModel(
+      id: _id,
       name: _title,
       calories: _calories,
       time: _foodConsumingTime,
@@ -116,7 +119,7 @@ class FoodConsumingNotifier extends ChangeNotifier {
       comment: _comment,
       cost: _cost,
     );
-    final index = _foodConsumingList.indexWhere((element) => element.time == _id);
+    final index = _foodConsumingList.indexWhere((element) => element.id == _id);
     _foodConsumingList[index] = foodConsuming;
     await _foodConsumingRepository.setFoodConsuming(_foodConsumingList);
     log('Food consuming updated: $_title');

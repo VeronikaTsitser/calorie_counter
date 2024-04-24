@@ -9,6 +9,7 @@ part of 'food_consuming_model.dart';
 _$FoodConsumingModelImpl _$$FoodConsumingModelImplFromJson(
         Map<String, dynamic> json) =>
     _$FoodConsumingModelImpl(
+      id: json['id'] as int,
       name: json['name'] as String,
       calories: json['calories'] as int,
       time: DateTime.parse(json['time'] as String),
@@ -20,6 +21,7 @@ _$FoodConsumingModelImpl _$$FoodConsumingModelImplFromJson(
 Map<String, dynamic> _$$FoodConsumingModelImplToJson(
         _$FoodConsumingModelImpl instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'name': instance.name,
       'calories': instance.calories,
       'time': instance.time.toIso8601String(),

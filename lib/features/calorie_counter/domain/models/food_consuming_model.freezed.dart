@@ -20,6 +20,7 @@ FoodConsumingModel _$FoodConsumingModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$FoodConsumingModel {
+  int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   int get calories => throw _privateConstructorUsedError;
   DateTime get time => throw _privateConstructorUsedError;
@@ -40,7 +41,8 @@ abstract class $FoodConsumingModelCopyWith<$Res> {
       _$FoodConsumingModelCopyWithImpl<$Res, FoodConsumingModel>;
   @useResult
   $Res call(
-      {String name,
+      {int id,
+      String name,
       int calories,
       DateTime time,
       String? composition,
@@ -61,6 +63,7 @@ class _$FoodConsumingModelCopyWithImpl<$Res, $Val extends FoodConsumingModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? name = null,
     Object? calories = null,
     Object? time = null,
@@ -69,6 +72,10 @@ class _$FoodConsumingModelCopyWithImpl<$Res, $Val extends FoodConsumingModel>
     Object? cost = freezed,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -106,7 +113,8 @@ abstract class _$$FoodConsumingModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String name,
+      {int id,
+      String name,
       int calories,
       DateTime time,
       String? composition,
@@ -125,6 +133,7 @@ class __$$FoodConsumingModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? name = null,
     Object? calories = null,
     Object? time = null,
@@ -133,6 +142,10 @@ class __$$FoodConsumingModelImplCopyWithImpl<$Res>
     Object? cost = freezed,
   }) {
     return _then(_$FoodConsumingModelImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -165,7 +178,8 @@ class __$$FoodConsumingModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$FoodConsumingModelImpl implements _FoodConsumingModel {
   _$FoodConsumingModelImpl(
-      {required this.name,
+      {required this.id,
+      required this.name,
       required this.calories,
       required this.time,
       this.composition,
@@ -175,6 +189,8 @@ class _$FoodConsumingModelImpl implements _FoodConsumingModel {
   factory _$FoodConsumingModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$FoodConsumingModelImplFromJson(json);
 
+  @override
+  final int id;
   @override
   final String name;
   @override
@@ -190,7 +206,7 @@ class _$FoodConsumingModelImpl implements _FoodConsumingModel {
 
   @override
   String toString() {
-    return 'FoodConsumingModel(name: $name, calories: $calories, time: $time, composition: $composition, comment: $comment, cost: $cost)';
+    return 'FoodConsumingModel(id: $id, name: $name, calories: $calories, time: $time, composition: $composition, comment: $comment, cost: $cost)';
   }
 
   @override
@@ -198,6 +214,7 @@ class _$FoodConsumingModelImpl implements _FoodConsumingModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FoodConsumingModelImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.calories, calories) ||
                 other.calories == calories) &&
@@ -211,7 +228,7 @@ class _$FoodConsumingModelImpl implements _FoodConsumingModel {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, name, calories, time, composition, comment, cost);
+      runtimeType, id, name, calories, time, composition, comment, cost);
 
   @JsonKey(ignore: true)
   @override
@@ -230,7 +247,8 @@ class _$FoodConsumingModelImpl implements _FoodConsumingModel {
 
 abstract class _FoodConsumingModel implements FoodConsumingModel {
   factory _FoodConsumingModel(
-      {required final String name,
+      {required final int id,
+      required final String name,
       required final int calories,
       required final DateTime time,
       final String? composition,
@@ -240,6 +258,8 @@ abstract class _FoodConsumingModel implements FoodConsumingModel {
   factory _FoodConsumingModel.fromJson(Map<String, dynamic> json) =
       _$FoodConsumingModelImpl.fromJson;
 
+  @override
+  int get id;
   @override
   String get name;
   @override

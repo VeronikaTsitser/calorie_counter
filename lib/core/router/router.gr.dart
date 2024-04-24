@@ -27,6 +27,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const FoodConsumingDetailsScreen(),
       );
     },
+    WaterConsumingDetailsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const WaterConsumingDetailsScreen(),
+      );
+    },
   };
 }
 
@@ -54,6 +60,20 @@ class FoodConsumingDetailsRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'FoodConsumingDetailsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [WaterConsumingDetailsScreen]
+class WaterConsumingDetailsRoute extends PageRouteInfo<void> {
+  const WaterConsumingDetailsRoute({List<PageRouteInfo>? children})
+      : super(
+          WaterConsumingDetailsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'WaterConsumingDetailsRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
