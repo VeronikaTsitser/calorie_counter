@@ -45,7 +45,7 @@ class CalorieCounterCard extends StatelessWidget {
                             composition: value.composition,
                             comment: value.comment,
                             cost: value.cost)
-                        .then((_) => statisticNotifier.getTotalCalories());
+                        .then((_) => statisticNotifier.getTotalCaloriesForToday());
                   }
                 },
               );

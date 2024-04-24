@@ -2,18 +2,18 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 
-Future<PopUpAction?> showAppActionSheet(BuildContext context) {
-  return showCupertinoModalPopup(
+Future<T?> showAppActionSheet<T>({required BuildContext context, required Widget child}) {
+  return showCupertinoModalPopup<T>(
     context: context,
-    builder: (context) => const ActionSheet(),
+    builder: (context) => child,
   ).then((value) {
     log('value: $value');
     return value;
   });
 }
 
-class ActionSheet extends StatelessWidget {
-  const ActionSheet({
+class EditDeleteActionSheet extends StatelessWidget {
+  const EditDeleteActionSheet({
     super.key,
   });
 

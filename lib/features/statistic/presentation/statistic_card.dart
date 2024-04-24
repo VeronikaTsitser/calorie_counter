@@ -1,6 +1,8 @@
+import 'package:calorie_counter/core/presentation/pop_ups.dart';
 import 'package:calorie_counter/core/presentation/theme.dart';
 import 'package:calorie_counter/core/presentation/widgets/base_app_container.dart';
 import 'package:calorie_counter/features/statistic/logic/statistic_notifier.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,6 +17,7 @@ class StatisticCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text('Статистика', style: AppTextStyle.s20w700),
+          const DatePeriodButton(),
           const SizedBox(height: 12),
           _StatisticContainer(title: 'Всего калорий', value: notifier.totalCalories, measurements: 'ккал'),
           _StatisticContainer(title: 'Всего жидкости', value: notifier.totalWater, measurements: 'мл', isLast: true),
@@ -23,6 +26,81 @@ class StatisticCard extends StatelessWidget {
     );
   }
 }
+
+class DatePeriodButton extends StatefulWidget {
+  const DatePeriodButton({
+    super.key,
+  });
+
+  @override
+  State<DatePeriodButton> createState() => _DatePeriodButtonState();
+}
+
+class _DatePeriodButtonState extends State<DatePeriodButton> {
+  String title = 'Сегодня';
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () =>
+          showAppActionSheet<TimePeriodEnum>(context: context, child: const _ChooseDatePeriodActionSheet()).then(
+        (value) {
+          if (value != null) {
+            switch (value) {
+              case TimePeriodEnum.today:
+                setState(() => title = 'Сегодня');
+                break;
+              case TimePeriodEnum.week:
+                setState(() => title = 'Неделя');
+                break;
+              case TimePeriodEnum.month:
+                setState(() => title = 'Месяц');
+                break;
+            }
+          }
+        },
+      ),
+      child: Row(
+        children: [
+          Text(title, style: AppTextStyle.s20w700),
+          SizedBox(
+            width: 40,
+            child: IconButton(
+              onPressed: () {},
+              icon: const Icon(CupertinoIcons.arrowtriangle_down_fill),
+              iconSize: 14,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ChooseDatePeriodActionSheet extends StatelessWidget {
+  const _ChooseDatePeriodActionSheet();
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoActionSheet(
+      actions: [
+        CupertinoActionSheetAction(
+          child: const Text('Сегодня'),
+          onPressed: () => Navigator.pop(context, TimePeriodEnum.today),
+        ),
+        CupertinoActionSheetAction(
+          child: const Text('Неделя'),
+          onPressed: () => Navigator.pop(context, TimePeriodEnum.week),
+        ),
+        CupertinoActionSheetAction(
+          child: const Text('Месяц'),
+          onPressed: () => Navigator.pop(context, TimePeriodEnum.month),
+        )
+      ],
+    );
+  }
+}
+
+enum TimePeriodEnum { today, week, month }
 
 class _StatisticContainer extends StatelessWidget {
   const _StatisticContainer(
