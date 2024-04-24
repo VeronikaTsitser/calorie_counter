@@ -1,6 +1,7 @@
 import 'package:calorie_counter/core/presentation/pop_ups.dart';
 import 'package:calorie_counter/core/presentation/theme.dart';
 import 'package:calorie_counter/core/presentation/widgets/base_app_container.dart';
+import 'package:calorie_counter/features/statistic/domain/enum.dart';
 import 'package:calorie_counter/features/statistic/logic/statistic_notifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -38,8 +39,10 @@ class DatePeriodButton extends StatefulWidget {
 
 class _DatePeriodButtonState extends State<DatePeriodButton> {
   String title = 'Сегодня';
+
   @override
   Widget build(BuildContext context) {
+    final notifier = context.watch<StatisticNotifier>();
     return GestureDetector(
       onTap: () =>
           showAppActionSheet<TimePeriodEnum>(context: context, child: const _ChooseDatePeriodActionSheet()).then(
@@ -47,12 +50,15 @@ class _DatePeriodButtonState extends State<DatePeriodButton> {
           if (value != null) {
             switch (value) {
               case TimePeriodEnum.today:
+                notifier.setTimePeriod(TimePeriodEnum.today);
                 setState(() => title = 'Сегодня');
                 break;
               case TimePeriodEnum.week:
+                notifier.setTimePeriod(TimePeriodEnum.week);
                 setState(() => title = 'Неделя');
                 break;
               case TimePeriodEnum.month:
+                notifier.setTimePeriod(TimePeriodEnum.month);
                 setState(() => title = 'Месяц');
                 break;
             }
@@ -99,8 +105,6 @@ class _ChooseDatePeriodActionSheet extends StatelessWidget {
     );
   }
 }
-
-enum TimePeriodEnum { today, week, month }
 
 class _StatisticContainer extends StatelessWidget {
   const _StatisticContainer(

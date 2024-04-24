@@ -1,6 +1,13 @@
 extension DateTimeExtensions on DateTime {
-  /// Возвращает DateTime на начало текущего дня (00:00:00)
   DateTime get startOfDay {
     return DateTime(year, month, day);
+  }
+
+  DateTime get dateWeekAgo {
+    return subtract(const Duration(days: 7));
+  }
+
+  DateTime get dateMonthAgo {
+    return DateTime(year, month - 1, day);
   }
 }
