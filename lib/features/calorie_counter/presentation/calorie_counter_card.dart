@@ -4,6 +4,7 @@ import 'package:calorie_counter/core/presentation/theme.dart';
 import 'package:calorie_counter/core/presentation/widgets/base_app_container.dart';
 import 'package:calorie_counter/core/router/router.dart';
 import 'package:calorie_counter/features/calorie_counter/domain/models/food_consuming_model.dart';
+import 'package:calorie_counter/features/calorie_counter/logic/food_consuming_details_notifier.dart';
 import 'package:calorie_counter/features/calorie_counter/logic/food_consuming_notifier.dart';
 import 'package:calorie_counter/features/calorie_counter/presentation/widgets/food_consuming_bottom_sheet_widget.dart';
 import 'package:calorie_counter/features/statistic/logic/statistic_notifier.dart';
@@ -70,7 +71,7 @@ class _FoodConsumingContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.read<FoodConsumingNotifier>().getFoodConsumingById(id);
+        context.read<FoodConsumingDetailsNotifier>().getFoodConsumingById(id);
         AutoRouter.of(context).push(const FoodConsumingDetailsRoute());
       },
       child: Container(

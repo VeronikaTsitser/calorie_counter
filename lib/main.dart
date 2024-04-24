@@ -5,6 +5,7 @@ import 'package:calorie_counter/features/body_parameters/domain/body_parameters_
 import 'package:calorie_counter/features/body_parameters/logic/body_parameters_notifier.dart';
 import 'package:calorie_counter/features/calorie_counter/data/food_consuming_repository_impl.dart';
 import 'package:calorie_counter/features/calorie_counter/domain/food_consuming_repository.dart';
+import 'package:calorie_counter/features/calorie_counter/logic/food_consuming_details_notifier.dart';
 import 'package:calorie_counter/features/calorie_counter/logic/food_consuming_notifier.dart';
 import 'package:calorie_counter/features/statistic/logic/statistic_notifier.dart';
 import 'package:calorie_counter/features/water_consuming/data/water_consuming_repository_impl.dart';
@@ -50,6 +51,8 @@ class _CalorieCounterAppState extends State<CalorieCounterApp> {
               create: (context) => BodyParameterNotifier(context.read<BodyParametersRepository>())..init()),
           ChangeNotifierProvider(
               create: (context) => FoodConsumingNotifier(context.read<FoodConsumingRepository>())..init()),
+          ChangeNotifierProvider(
+              create: (context) => FoodConsumingDetailsNotifier(context.read<FoodConsumingRepository>())),
           ChangeNotifierProvider(
             create: (context) => StatisticNotifier(
               context.read<FoodConsumingRepository>(),

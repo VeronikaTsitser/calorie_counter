@@ -3,7 +3,7 @@ import 'package:calorie_counter/core/presentation/pop_ups.dart';
 import 'package:calorie_counter/core/presentation/theme.dart';
 import 'package:calorie_counter/core/presentation/widgets/base_app_container.dart';
 import 'package:calorie_counter/core/presentation/widgets/base_app_input_widget.dart';
-import 'package:calorie_counter/features/calorie_counter/logic/food_consuming_notifier.dart';
+import 'package:calorie_counter/features/calorie_counter/logic/food_consuming_details_notifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,7 +14,7 @@ class FoodConsumingDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final notifier = context.watch<FoodConsumingNotifier>();
+    final notifier = context.watch<FoodConsumingDetailsNotifier>();
 
     return Scaffold(
       appBar: AppBar(
@@ -49,7 +49,7 @@ class _FoodConsumingDetailsBodyState extends State<_FoodConsumingDetailsBody> {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    final notifier = context.watch<FoodConsumingNotifier>();
+    final notifier = context.watch<FoodConsumingDetailsNotifier>();
     final isEditMode = notifier.isEditMode;
     return Form(
       key: _formKey,
