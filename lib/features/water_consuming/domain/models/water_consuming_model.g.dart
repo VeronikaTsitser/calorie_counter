@@ -11,7 +11,7 @@ _$WaterConsumingModelImpl _$$WaterConsumingModelImplFromJson(
     _$WaterConsumingModelImpl(
       name: json['name'] as String,
       consumedWaterValue: json['consumedWaterValue'] as int,
-      date: DateTime.parse(json['date'] as String),
+      time: DateTime.parse(json['time'] as String),
     );
 
 Map<String, dynamic> _$$WaterConsumingModelImplToJson(
@@ -19,5 +19,5 @@ Map<String, dynamic> _$$WaterConsumingModelImplToJson(
     <String, dynamic>{
       'name': instance.name,
       'consumedWaterValue': instance.consumedWaterValue,
-      'date': instance.date.toIso8601String(),
+      'time': instance.time.toIso8601String(),
     };

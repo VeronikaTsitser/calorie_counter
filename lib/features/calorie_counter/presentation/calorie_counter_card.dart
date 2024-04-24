@@ -45,7 +45,7 @@ class CalorieCounterCard extends StatelessWidget {
                             composition: value.composition,
                             comment: value.comment,
                             cost: value.cost)
-                        .then((_) => statisticNotifier.getTotalCaloriesForToday());
+                        .then((_) => statisticNotifier.getTotalCalories());
                   }
                 },
               );
@@ -63,16 +63,19 @@ class _FoodConsumingContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-      decoration: BoxDecoration(color: AppColors.primaryBg, borderRadius: BorderRadius.circular(12)),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(foodName, style: AppTextStyle.s16w600.copyWith(color: AppColors.primary)),
-          Text('$calories ккал', style: AppTextStyle.s16w600.copyWith(color: AppColors.primary)),
-        ],
+    return GestureDetector(
+      onTap: () {},
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+        decoration: BoxDecoration(color: AppColors.primaryBg, borderRadius: BorderRadius.circular(12)),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(foodName, style: AppTextStyle.s16w600.copyWith(color: AppColors.primary)),
+            Text('$calories ккал', style: AppTextStyle.s16w600.copyWith(color: AppColors.primary)),
+          ],
+        ),
       ),
     );
   }

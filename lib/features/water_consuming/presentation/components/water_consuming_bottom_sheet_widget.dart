@@ -29,7 +29,7 @@ class _WaterConsumingBottomSheetWidgetState extends State<WaterConsumingBottomSh
               WaterConsumingModel(
                 name: _drinkName,
                 consumedWaterValue: _waterConsuming,
-                date: _lastWaterConsumingTime,
+                time: _lastWaterConsumingTime,
               ));
         }
       },

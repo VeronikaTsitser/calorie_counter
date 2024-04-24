@@ -78,7 +78,7 @@ class _AddWaterConsumingButton extends StatelessWidget {
                     .addWaterConsuming(
                         drinkName: value.name,
                         waterConsuming: value.consumedWaterValue,
-                        lastWaterConsumingTime: value.date)
+                        lastWaterConsumingTime: value.time)
                     .then((_) => statisticNotifier.getTotalWater());
               }
             },

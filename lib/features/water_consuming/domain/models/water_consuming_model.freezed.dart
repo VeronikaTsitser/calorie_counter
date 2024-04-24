@@ -22,7 +22,7 @@ WaterConsumingModel _$WaterConsumingModelFromJson(Map<String, dynamic> json) {
 mixin _$WaterConsumingModel {
   String get name => throw _privateConstructorUsedError;
   int get consumedWaterValue => throw _privateConstructorUsedError;
-  DateTime get date => throw _privateConstructorUsedError;
+  DateTime get time => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +36,7 @@ abstract class $WaterConsumingModelCopyWith<$Res> {
           WaterConsumingModel value, $Res Function(WaterConsumingModel) then) =
       _$WaterConsumingModelCopyWithImpl<$Res, WaterConsumingModel>;
   @useResult
-  $Res call({String name, int consumedWaterValue, DateTime date});
+  $Res call({String name, int consumedWaterValue, DateTime time});
 }
 
 /// @nodoc
@@ -54,7 +54,7 @@ class _$WaterConsumingModelCopyWithImpl<$Res, $Val extends WaterConsumingModel>
   $Res call({
     Object? name = null,
     Object? consumedWaterValue = null,
-    Object? date = null,
+    Object? time = null,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -65,9 +65,9 @@ class _$WaterConsumingModelCopyWithImpl<$Res, $Val extends WaterConsumingModel>
           ? _value.consumedWaterValue
           : consumedWaterValue // ignore: cast_nullable_to_non_nullable
               as int,
-      date: null == date
-          ? _value.date
-          : date // ignore: cast_nullable_to_non_nullable
+      time: null == time
+          ? _value.time
+          : time // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ) as $Val);
   }
@@ -81,7 +81,7 @@ abstract class _$$WaterConsumingModelImplCopyWith<$Res>
       __$$WaterConsumingModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, int consumedWaterValue, DateTime date});
+  $Res call({String name, int consumedWaterValue, DateTime time});
 }
 
 /// @nodoc
@@ -97,7 +97,7 @@ class __$$WaterConsumingModelImplCopyWithImpl<$Res>
   $Res call({
     Object? name = null,
     Object? consumedWaterValue = null,
-    Object? date = null,
+    Object? time = null,
   }) {
     return _then(_$WaterConsumingModelImpl(
       name: null == name
@@ -108,9 +108,9 @@ class __$$WaterConsumingModelImplCopyWithImpl<$Res>
           ? _value.consumedWaterValue
           : consumedWaterValue // ignore: cast_nullable_to_non_nullable
               as int,
-      date: null == date
-          ? _value.date
-          : date // ignore: cast_nullable_to_non_nullable
+      time: null == time
+          ? _value.time
+          : time // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
   }
@@ -122,7 +122,7 @@ class _$WaterConsumingModelImpl implements _WaterConsumingModel {
   _$WaterConsumingModelImpl(
       {required this.name,
       required this.consumedWaterValue,
-      required this.date});
+      required this.time});
 
   factory _$WaterConsumingModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$WaterConsumingModelImplFromJson(json);
@@ -132,11 +132,11 @@ class _$WaterConsumingModelImpl implements _WaterConsumingModel {
   @override
   final int consumedWaterValue;
   @override
-  final DateTime date;
+  final DateTime time;
 
   @override
   String toString() {
-    return 'WaterConsumingModel(name: $name, consumedWaterValue: $consumedWaterValue, date: $date)';
+    return 'WaterConsumingModel(name: $name, consumedWaterValue: $consumedWaterValue, time: $time)';
   }
 
   @override
@@ -147,12 +147,12 @@ class _$WaterConsumingModelImpl implements _WaterConsumingModel {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.consumedWaterValue, consumedWaterValue) ||
                 other.consumedWaterValue == consumedWaterValue) &&
-            (identical(other.date, date) || other.date == date));
+            (identical(other.time, time) || other.time == time));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, name, consumedWaterValue, date);
+  int get hashCode => Object.hash(runtimeType, name, consumedWaterValue, time);
 
   @JsonKey(ignore: true)
   @override
@@ -173,7 +173,7 @@ abstract class _WaterConsumingModel implements WaterConsumingModel {
   factory _WaterConsumingModel(
       {required final String name,
       required final int consumedWaterValue,
-      required final DateTime date}) = _$WaterConsumingModelImpl;
+      required final DateTime time}) = _$WaterConsumingModelImpl;
 
   factory _WaterConsumingModel.fromJson(Map<String, dynamic> json) =
       _$WaterConsumingModelImpl.fromJson;
@@ -183,7 +183,7 @@ abstract class _WaterConsumingModel implements WaterConsumingModel {
   @override
   int get consumedWaterValue;
   @override
-  DateTime get date;
+  DateTime get time;
   @override
   @JsonKey(ignore: true)
   _$$WaterConsumingModelImplCopyWith<_$WaterConsumingModelImpl> get copyWith =>

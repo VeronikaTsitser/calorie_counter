@@ -8,7 +8,7 @@ class WaterConsumingModel with _$WaterConsumingModel {
   factory WaterConsumingModel({
     required String name,
     required int consumedWaterValue,
-    required DateTime date,
+    required DateTime time,
   }) = _WaterConsumingModel;
 
   factory WaterConsumingModel.fromJson(Map<String, dynamic> json) => _$WaterConsumingModelFromJson(json);

@@ -23,7 +23,7 @@ class WaterConsumingNotifier extends ChangeNotifier {
     _waterConsumingList.add(WaterConsumingModel(
       name: drinkName,
       consumedWaterValue: waterConsuming,
-      date: lastWaterConsumingTime,
+      time: lastWaterConsumingTime,
     ));
     await _waterConsumingRepository.setWaterConsuming(_waterConsumingList);
     notifyListeners();
