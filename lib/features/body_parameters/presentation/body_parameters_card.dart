@@ -43,7 +43,7 @@ class _BodyParametersCardState extends State<BodyParametersCard> {
                 keyboardType: TextInputType.number,
                 onChanged: (value) {
                   if (value != null) {
-                    notifier.setWeight(double.parse(value));
+                    notifier.setWeight(double.tryParse(value));
                   }
                 },
               ),
@@ -55,7 +55,7 @@ class _BodyParametersCardState extends State<BodyParametersCard> {
                 keyboardType: TextInputType.number,
                 onChanged: (value) {
                   if (value != null) {
-                    notifier.setHeight(int.parse(value));
+                    notifier.setHeight(int.tryParse(value));
                   }
                 },
               ),
@@ -67,7 +67,7 @@ class _BodyParametersCardState extends State<BodyParametersCard> {
                 keyboardType: TextInputType.number,
                 onChanged: (value) {
                   if (value != null) {
-                    notifier.setFatPercentage(int.parse(value));
+                    notifier.setFatPercentage(int.tryParse(value));
                   }
                 },
               ),
@@ -79,7 +79,7 @@ class _BodyParametersCardState extends State<BodyParametersCard> {
                   keyboardType: TextInputType.number,
                   onChanged: (value) {
                     if (value != null) {
-                      notifier.setCalories(int.parse(value));
+                      notifier.setCalories(int.tryParse(value));
                     }
                   }),
               BaseAppInputWidget(
@@ -90,7 +90,7 @@ class _BodyParametersCardState extends State<BodyParametersCard> {
                   keyboardType: TextInputType.number,
                   onChanged: (value) {
                     if (value != null) {
-                      notifier.setWater(int.parse(value));
+                      notifier.setWater(int.tryParse(value));
                     }
                   }),
               if (isEditMode) ...[
