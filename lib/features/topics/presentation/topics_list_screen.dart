@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:auto_route/auto_route.dart';
 import 'package:calorie_counter/core/presentation/theme.dart';
 import 'package:calorie_counter/core/router/router.dart';
+import 'package:calorie_counter/features/topics/domain/models/topic_model.dart';
 import 'package:calorie_counter/features/topics/logic/topics_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,10 +26,7 @@ class TopicsListScreen extends StatelessWidget {
           slivers: [
             SliverList(
               delegate: SliverChildBuilderDelegate(
-                (context, index) => TopicsListCard(
-                  title: notifier.topicsList[index].title,
-                  imagePath: notifier.topicsList[index].path,
-                ),
+                (context, index) => TopicsListCard(topic: notifier.topicsList[index]),
                 childCount: notifier.topicsList.length,
               ),
             )
@@ -40,19 +38,14 @@ class TopicsListScreen extends StatelessWidget {
 }
 
 class TopicsListCard extends StatelessWidget {
-  const TopicsListCard({
-    super.key,
-    required this.title,
-    required this.imagePath,
-  });
+  const TopicsListCard({super.key, required this.topic});
 
-  final String title;
-  final String imagePath;
+  final TopicModel topic;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () => AutoRouter.of(context).push(const TopicDetailsRoute()),
+        onTap: () => AutoRouter.of(context).push(TopicDetailsRoute(topic: topic)),
         child: Container(
           height: 150.h,
           margin: const EdgeInsets.only(top: 12),
@@ -61,7 +54,7 @@ class TopicsListCard extends StatelessWidget {
           child: Stack(
             fit: StackFit.expand,
             children: [
-              Image.asset(imagePath, fit: BoxFit.fitWidth),
+              Image.asset(topic.path, fit: BoxFit.fitWidth),
               Positioned(
                 bottom: 0,
                 left: 0,
@@ -76,7 +69,7 @@ class TopicsListCard extends StatelessWidget {
                           padding: const EdgeInsets.all(20),
                           color: Colors.black.withOpacity(0.1),
                           child: Text(
-                            title,
+                            topic.title,
                             style: AppTextStyle.s20w700.copyWith(color: Colors.white),
                           ),
                         ),
