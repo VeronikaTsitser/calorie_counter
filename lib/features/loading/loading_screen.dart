@@ -16,9 +16,9 @@ class _LoadingScreenState extends State<LoadingScreen> {
   void initState() {
     _isOnboardingShown().then((isOnboardingShown) {
       if (isOnboardingShown) {
-        AutoRouter.of(context).replace(const DashBoardRoute());
+        AutoRouter.of(context).pushAndPopUntil(const DashBoardRoute(), predicate: (_) => false);
       } else {
-        AutoRouter.of(context).replace(const OnboardingRoute());
+        AutoRouter.of(context).pushAndPopUntil(const OnboardingRoute(), predicate: (_) => false);
         setOnboardingShown();
       }
     });

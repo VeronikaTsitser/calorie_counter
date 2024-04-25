@@ -47,7 +47,6 @@ class _OnboardingBodyState extends State<OnboardingBody> {
                 _pageIndex = index;
               });
             },
-            // scrollPhysics: const NeverScrollableScrollPhysics(),
             height: 400,
             enableInfiniteScroll: false,
             viewportFraction: 1,

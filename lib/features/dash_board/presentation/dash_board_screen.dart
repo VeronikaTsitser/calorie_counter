@@ -14,7 +14,6 @@ import 'package:calorie_counter/features/water_consuming/presentation/water_cons
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 @RoutePage()
 class DashBoardScreen extends StatelessWidget {
@@ -29,16 +28,16 @@ class DashBoardScreen extends StatelessWidget {
     final waterNotifier = context.watch<WaterConsumingNotifier>();
 
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          SharedPreferences.getInstance().then((prefs) {
-            prefs.clear();
-          });
-          // context.read<FoodConsumingNotifier>().addMockFoodConsuming();
-          // context.read<WaterConsumingNotifier>().addMockWaterConsuming();
-        },
-        child: const Icon(CupertinoIcons.clear),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     SharedPreferences.getInstance().then((prefs) {
+      //       prefs.clear();
+      //     });
+      //     // context.read<FoodConsumingNotifier>().addMockFoodConsuming();
+      //     // context.read<WaterConsumingNotifier>().addMockWaterConsuming();
+      //   },
+      //   child: const Icon(CupertinoIcons.clear),
+      // ),
       appBar: AppBar(
         title: Row(
           children: [
