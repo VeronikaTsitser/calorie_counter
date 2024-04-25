@@ -87,7 +87,7 @@ class FoodConsumingDetailsNotifier extends ChangeNotifier {
     foodConsumingList[index] = foodConsuming;
     await _foodConsumingRepository.setFoodConsuming(foodConsumingList);
     log('Food consuming updated: $_title');
-    setEditMode(false);
+    _isEditMode = false;
     notifyListeners();
   }
 }
