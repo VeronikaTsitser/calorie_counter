@@ -4,6 +4,7 @@ import 'package:calorie_counter/core/presentation/theme.dart';
 import 'package:calorie_counter/core/presentation/widgets/base_app_container.dart';
 import 'package:calorie_counter/core/presentation/widgets/base_app_input_widget.dart';
 import 'package:calorie_counter/features/calorie_counter/logic/food_consuming_details_notifier.dart';
+import 'package:calorie_counter/features/calorie_counter/logic/food_consuming_notifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,6 +28,19 @@ class FoodConsumingDetailsScreen extends StatelessWidget {
               (value) {
                 if (value == PopUpAction.edit) {
                   notifier.setEditMode(true);
+                }
+                if (value == PopUpAction.clear) {
+                  showAppCupertinoDialog<bool>(
+                      context: context,
+                      child: const DeleteAlertDialogWidget(
+                        title: 'Вы действительно хотите удалить данные?',
+                      )).then((value) {
+                    if (value == true) {
+                      context.read<FoodConsumingNotifier>().deleteFoodConsuming(notifier.id).then(
+                            (_) => Navigator.of(context).pop(),
+                          );
+                    }
+                  });
                 }
               },
             ),
