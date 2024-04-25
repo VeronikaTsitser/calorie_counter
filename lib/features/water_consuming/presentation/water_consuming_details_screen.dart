@@ -4,6 +4,7 @@ import 'package:calorie_counter/core/presentation/theme.dart';
 import 'package:calorie_counter/core/presentation/widgets/base_app_container.dart';
 import 'package:calorie_counter/core/presentation/widgets/base_app_input_widget.dart';
 import 'package:calorie_counter/features/water_consuming/logic/water_consuming_details_notifier.dart';
+import 'package:calorie_counter/features/water_consuming/logic/water_consuming_notifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,6 +27,19 @@ class WaterConsumingDetailsScreen extends StatelessWidget {
               (value) {
                 if (value == PopUpAction.edit) {
                   notifier.setEditMode(true);
+                }
+                if (value == PopUpAction.clear) {
+                  showAppCupertinoDialog<bool>(
+                      context: context,
+                      child: const DeleteAlertDialogWidget(
+                        title: 'Вы действительно хотите удалить приём жидкости?',
+                      )).then((value) {
+                    if (value == true) {
+                      context.read<WaterConsumingNotifier>().deleteWaterConsuming(notifier.id).then(
+                            (_) => Navigator.of(context).pop(),
+                          );
+                    }
+                  });
                 }
               },
             ),

@@ -9,6 +9,7 @@ class WaterConsumingDetailsNotifier extends ChangeNotifier {
   final WaterConsumingRepository _waterConsumingRepository;
 
   int _id = 0;
+  int get id => _id;
 
   String _title = '';
   String get title => _title;

@@ -56,4 +56,10 @@ class WaterConsumingNotifier extends ChangeNotifier {
     await _waterConsumingRepository.setWaterConsuming(waterConsumingList);
     notifyListeners();
   }
+
+  Future<void> deleteWaterConsuming(int id) async {
+    _waterConsumingList.removeWhere((element) => element.id == id);
+    await _waterConsumingRepository.setWaterConsuming(_waterConsumingList);
+    notifyListeners();
+  }
 }
