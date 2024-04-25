@@ -1,4 +1,5 @@
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 extension DateTimeExtensions on DateTime {
   DateTime get startOfDay {
@@ -29,5 +30,11 @@ String formatDateTime(DateTime date) {
     return DateFormat('d MMMM y', 'ru_RU').format(date);
   } else {
     return DateFormat('d MMMM', 'ru_RU').format(date);
+  }
+}
+
+Future<void> launchAppUrl(Uri url) async {
+  if (!await launchUrl(url)) {
+    throw Exception('Could not launch $url');
   }
 }

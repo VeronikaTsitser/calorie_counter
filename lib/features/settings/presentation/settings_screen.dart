@@ -1,7 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:calorie_counter/core/constant/app_const.dart';
 import 'package:calorie_counter/core/presentation/theme.dart';
 import 'package:calorie_counter/core/router/router.dart';
+import 'package:calorie_counter/core/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 @RoutePage()
@@ -18,9 +20,18 @@ class SettingsScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20).copyWith(top: 12),
         child: Column(
           children: [
-            _SettingsTile(title: 'Политика конфиденциальности', onTap: () {}),
-            _SettingsTile(title: 'Пользовательское соглашение', onTap: () {}),
-            _SettingsTile(title: 'Оставить обращение', onTap: () => AutoRouter.of(context).push(const AppealRoute())),
+            _SettingsTile(
+              title: 'Политика конфиденциальности',
+              onTap: () => launchAppUrl(Uri.parse(AppConst.privacyPolicyUrl)),
+            ),
+            _SettingsTile(
+              title: 'Пользовательское соглашение',
+              onTap: () => launchAppUrl(Uri.parse(AppConst.userAgreementUrl)),
+            ),
+            _SettingsTile(
+              title: 'Оставить обращение',
+              onTap: () => AutoRouter.of(context).push(const AppealRoute()),
+            ),
             const Spacer(),
             ElevatedButton(
                 onPressed: () {

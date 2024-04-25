@@ -9,6 +9,9 @@ import 'package:calorie_counter/features/calorie_counter/logic/food_consuming_de
 import 'package:calorie_counter/features/calorie_counter/logic/food_consuming_notifier.dart';
 import 'package:calorie_counter/features/dash_board/logic/dash_board_filter_notifier.dart';
 import 'package:calorie_counter/features/statistic/logic/statistic_notifier.dart';
+import 'package:calorie_counter/features/topics/data/topics_repository_impl.dart';
+import 'package:calorie_counter/features/topics/domain/topics_repository.dart';
+import 'package:calorie_counter/features/topics/logic/topics_notifier.dart';
 import 'package:calorie_counter/features/water_consuming/data/water_consuming_repository_impl.dart';
 import 'package:calorie_counter/features/water_consuming/domain/water_consuming_repository.dart';
 import 'package:calorie_counter/features/water_consuming/logic/water_consuming_details_notifier.dart';
@@ -47,6 +50,7 @@ class _CalorieCounterAppState extends State<CalorieCounterApp> {
           RepositoryProvider<BodyParametersRepository>(create: (context) => BodyParametersRepositoryImpl()),
           RepositoryProvider<WaterConsumingRepository>(create: (context) => WaterConsumingRepositoryImpl()),
           RepositoryProvider<FoodConsumingRepository>(create: (context) => FoodConsumingRepositoryImpl()),
+          RepositoryProvider<TopicsRepository>(create: (context) => TopicsRepositoryImpl()),
           ChangeNotifierProvider(
               create: (context) => WaterConsumingNotifier(context.read<WaterConsumingRepository>())..init()),
           ChangeNotifierProvider(
@@ -57,6 +61,7 @@ class _CalorieCounterAppState extends State<CalorieCounterApp> {
               create: (context) => FoodConsumingNotifier(context.read<FoodConsumingRepository>())..init()),
           ChangeNotifierProvider(
               create: (context) => FoodConsumingDetailsNotifier(context.read<FoodConsumingRepository>())),
+          ChangeNotifierProvider(create: (context) => TopicsNotifier(context.read<TopicsRepository>())..getTopics()),
           ChangeNotifierProvider(create: (context) => DashBoardFilterNotifier()),
           ChangeNotifierProvider(
             create: (context) => StatisticNotifier(
