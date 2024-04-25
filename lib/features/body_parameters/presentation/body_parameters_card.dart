@@ -134,7 +134,16 @@ class _BodyParametersTitle extends StatelessWidget {
                     context.read<BodyParameterNotifier>().setEditMode(true);
                   }
                   if (value == PopUpAction.clear) {
-                    context.read<BodyParameterNotifier>().clearBodyParameters();
+                    showAppCupertinoDialog(
+                            child: const DeleteAlertDialogWidget(
+                              title: 'Вы действительно хотите удалить данные?',
+                            ),
+                            context: context)
+                        .then((value) {
+                      if (value == true) {
+                        context.read<BodyParameterNotifier>().clearBodyParameters();
+                      }
+                    });
                   }
                 });
               },

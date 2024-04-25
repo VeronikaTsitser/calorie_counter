@@ -7,9 +7,16 @@ import 'package:flutter/material.dart';
 class FoodConsumingNotifier extends ChangeNotifier {
   FoodConsumingNotifier(this._foodConsumingRepository);
   final FoodConsumingRepository _foodConsumingRepository;
+  DateTime _date = DateTime.now();
 
   List<FoodConsumingModel> _foodConsumingList = [];
-  List<FoodConsumingModel> get foodConsumingList => _foodConsumingList;
+  List<FoodConsumingModel> get foodConsumingList => _foodConsumingList.where((element) {
+        final isSameDay = element.time.day == _date.day;
+        final isSameMonth = element.time.month == _date.month;
+        final isSameYear = element.time.year == _date.year;
+        final result = isSameDay && isSameMonth && isSameYear;
+        return result;
+      }).toList();
   void setFoodConsumingList(List<FoodConsumingModel> value) {
     _foodConsumingList = value;
     notifyListeners();
@@ -21,14 +28,7 @@ class FoodConsumingNotifier extends ChangeNotifier {
 
   Future<void> getSortedConsumingsByDate(DateTime date) async {
     _foodConsumingList = await _foodConsumingRepository.getFoodConsuming();
-    final sortedList = _foodConsumingList.where((element) {
-      final isSameDay = element.time.day == date.day;
-      final isSameMonth = element.time.month == date.month;
-      final isSameYear = element.time.year == date.year;
-      final result = isSameDay && isSameMonth && isSameYear;
-      return result;
-    }).toList();
-    _foodConsumingList = sortedList;
+    _date = date;
     notifyListeners();
   }
 

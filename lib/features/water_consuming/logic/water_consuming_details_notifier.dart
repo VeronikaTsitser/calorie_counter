@@ -40,6 +40,7 @@ class WaterConsumingDetailsNotifier extends ChangeNotifier {
   }
 
   Future<void> getWaterConsumingById(int id) async {
+    _isEditMode = false;
     final waterConsumingList = await _waterConsumingRepository.getWaterConsuming();
     final waterConsuming = waterConsumingList.firstWhere((element) => element.id == id);
     _title = waterConsuming.name;

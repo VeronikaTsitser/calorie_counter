@@ -61,6 +61,7 @@ class FoodConsumingDetailsNotifier extends ChangeNotifier {
   }
 
   Future<void> getFoodConsumingById(int id) async {
+    _isEditMode = false;
     final foodConsumingList = await _foodConsumingRepository.getFoodConsuming();
     final foodConsuming = foodConsumingList.firstWhere((element) => element.id == id);
     _title = foodConsuming.name;

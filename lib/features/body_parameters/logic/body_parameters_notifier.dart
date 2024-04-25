@@ -36,12 +36,21 @@ class BodyParameterNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  void clearBodyParameters() {
+  Future<void> clearBodyParameters() async {
     _weight = null;
     _height = null;
     _fatPercentage = null;
     _calories = null;
     _water = null;
+    await bodyParametersRepository.setBodyParameters(
+      BodyParametersModel(
+        weight: _weight,
+        height: _height,
+        fatPercentage: _fatPercentage,
+        calories: _calories,
+        water: _water,
+      ),
+    );
     _isEditMode = true;
     notifyListeners();
   }
