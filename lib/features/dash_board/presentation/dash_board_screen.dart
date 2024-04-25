@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:calorie_counter/core/presentation/pop_ups.dart';
 import 'package:calorie_counter/core/presentation/theme.dart';
 import 'package:calorie_counter/core/presentation/widgets/base_app_date_picker.dart';
+import 'package:calorie_counter/core/router/router.dart';
 import 'package:calorie_counter/core/utils/utils.dart';
 import 'package:calorie_counter/features/body_parameters/presentation/body_parameters_card.dart';
 import 'package:calorie_counter/features/calorie_counter/logic/food_consuming_notifier.dart';
@@ -62,12 +63,11 @@ class DashBoardScreen extends StatelessWidget {
         actions: [
           IconButton(
             icon: Image.asset('assets/icons/topics_icon.png'),
-            onPressed: () {}, //TODO
+            onPressed: () => AutoRouter.of(context).push(const TopicsListRoute()),
           ),
           IconButton(
-            icon: Image.asset('assets/icons/settings_icon.png'),
-            onPressed: () {}, //TODO
-          ),
+              icon: Image.asset('assets/icons/settings_icon.png'),
+              onPressed: () => AutoRouter.of(context).push(const SettingsRoute())),
         ],
       ),
       body: CustomScrollView(
