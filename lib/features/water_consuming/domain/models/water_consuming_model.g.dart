@@ -9,9 +9,9 @@ part of 'water_consuming_model.dart';
 _$WaterConsumingModelImpl _$$WaterConsumingModelImplFromJson(
         Map<String, dynamic> json) =>
     _$WaterConsumingModelImpl(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       name: json['name'] as String,
-      consumedWaterValue: json['consumedWaterValue'] as int,
+      consumedWaterValue: (json['consumedWaterValue'] as num).toInt(),
       time: DateTime.parse(json['time'] as String),
     );
 

@@ -10,10 +10,10 @@ _$BodyParametersModelImpl _$$BodyParametersModelImplFromJson(
         Map<String, dynamic> json) =>
     _$BodyParametersModelImpl(
       weight: (json['weight'] as num?)?.toDouble(),
-      height: json['height'] as int?,
-      fatPercentage: json['fatPercentage'] as int?,
-      calories: json['calories'] as int?,
-      water: json['water'] as int?,
+      height: (json['height'] as num?)?.toInt(),
+      fatPercentage: (json['fatPercentage'] as num?)?.toInt(),
+      calories: (json['calories'] as num?)?.toInt(),
+      water: (json['water'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$BodyParametersModelImplToJson(
