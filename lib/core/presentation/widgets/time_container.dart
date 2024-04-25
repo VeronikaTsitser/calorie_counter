@@ -20,7 +20,7 @@ class _TimeContainerState extends State<TimeContainer> {
     String timeNow = '${time.hour}:${time.minute.toString().padLeft(2, '0')}';
     return GestureDetector(
       onTap: widget.isEditMode
-          ? () => showAppTimePicker(context, time).then((value) {
+          ? () => showAppTimePicker(context: context, child: AppTimePicker(initialTime: time)).then((value) {
                 widget.onChanged(value);
                 if (value != null) {
                   setState(() {

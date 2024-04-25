@@ -66,9 +66,9 @@ class DeleteAlertDialogWidget extends StatelessWidget {
   }
 }
 
-Future<DateTime?> showAppTimePicker(BuildContext context, DateTime initialTime) => showCupertinoModalPopup(
+Future<DateTime?> showAppTimePicker({required BuildContext context, required Widget child}) => showCupertinoModalPopup(
       context: context,
-      builder: (BuildContext context) => AppTimePicker(initialTime: initialTime),
+      builder: (BuildContext context) => child,
     ).then((value) {
       log('value: $value');
       return value;

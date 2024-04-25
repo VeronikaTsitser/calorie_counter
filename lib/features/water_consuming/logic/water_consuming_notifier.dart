@@ -6,12 +6,23 @@ class WaterConsumingNotifier extends ChangeNotifier {
   WaterConsumingNotifier(this._waterConsumingRepository);
   final WaterConsumingRepository _waterConsumingRepository;
 
-  final List<WaterConsumingModel> _waterConsumingList = [];
+  List<WaterConsumingModel> _waterConsumingList = [];
   List<WaterConsumingModel> get waterConsumingList => _waterConsumingList;
 
   Future<void> init() async {
-    _waterConsumingList.clear();
-    _waterConsumingList.addAll(await _waterConsumingRepository.getWaterConsuming());
+    getSortedConsumingsByDate(DateTime.now());
+  }
+
+  Future<void> getSortedConsumingsByDate(DateTime date) async {
+    _waterConsumingList = await _waterConsumingRepository.getWaterConsuming();
+    final sortedList = _waterConsumingList.where((element) {
+      final isSameDay = element.time.day == date.day;
+      final isSameMonth = element.time.month == date.month;
+      final isSameYear = element.time.year == date.year;
+      final result = isSameDay && isSameMonth && isSameYear;
+      return result;
+    }).toList();
+    _waterConsumingList = sortedList;
     notifyListeners();
   }
 

@@ -8,17 +8,27 @@ class FoodConsumingNotifier extends ChangeNotifier {
   FoodConsumingNotifier(this._foodConsumingRepository);
   final FoodConsumingRepository _foodConsumingRepository;
 
-  final List<FoodConsumingModel> _foodConsumingList = [];
+  List<FoodConsumingModel> _foodConsumingList = [];
   List<FoodConsumingModel> get foodConsumingList => _foodConsumingList;
   void setFoodConsumingList(List<FoodConsumingModel> value) {
-    _foodConsumingList.clear();
-    _foodConsumingList.addAll(value);
+    _foodConsumingList = value;
     notifyListeners();
   }
 
   Future<void> init() async {
-    _foodConsumingList.clear();
-    _foodConsumingList.addAll(await _foodConsumingRepository.getFoodConsuming());
+    await getSortedConsumingsByDate(DateTime.now());
+  }
+
+  Future<void> getSortedConsumingsByDate(DateTime date) async {
+    _foodConsumingList = await _foodConsumingRepository.getFoodConsuming();
+    final sortedList = _foodConsumingList.where((element) {
+      final isSameDay = element.time.day == date.day;
+      final isSameMonth = element.time.month == date.month;
+      final isSameYear = element.time.year == date.year;
+      final result = isSameDay && isSameMonth && isSameYear;
+      return result;
+    }).toList();
+    _foodConsumingList = sortedList;
     notifyListeners();
   }
 
