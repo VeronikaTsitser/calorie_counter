@@ -5,9 +5,11 @@ import 'package:calorie_counter/features/loading/loading_screen.dart';
 import 'package:calorie_counter/features/onboarding/presentation/onboarding_screen.dart';
 import 'package:calorie_counter/features/settings/presentation/appeal_screen.dart';
 import 'package:calorie_counter/features/settings/presentation/settings_screen.dart';
+import 'package:calorie_counter/features/topics/domain/models/topic_model.dart';
 import 'package:calorie_counter/features/topics/presentation/topic_details_screen.dart';
 import 'package:calorie_counter/features/topics/presentation/topics_list_screen.dart';
 import 'package:calorie_counter/features/water_consuming/presentation/water_consuming_details_screen.dart';
+import 'package:flutter/material.dart';
 
 part 'router.gr.dart';
 

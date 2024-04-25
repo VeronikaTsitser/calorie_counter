@@ -52,9 +52,13 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     TopicDetailsRoute.name: (routeData) {
+      final args = routeData.argsAs<TopicDetailsRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const TopicDetailsScreen(),
+        child: TopicDetailsScreen(
+          key: args.key,
+          topic: args.topic,
+        ),
       );
     },
     TopicsListRoute.name: (routeData) {
@@ -158,16 +162,40 @@ class SettingsRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [TopicDetailsScreen]
-class TopicDetailsRoute extends PageRouteInfo<void> {
-  const TopicDetailsRoute({List<PageRouteInfo>? children})
-      : super(
+class TopicDetailsRoute extends PageRouteInfo<TopicDetailsRouteArgs> {
+  TopicDetailsRoute({
+    Key? key,
+    required TopicModel topic,
+    List<PageRouteInfo>? children,
+  }) : super(
           TopicDetailsRoute.name,
+          args: TopicDetailsRouteArgs(
+            key: key,
+            topic: topic,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'TopicDetailsRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<TopicDetailsRouteArgs> page =
+      PageInfo<TopicDetailsRouteArgs>(name);
+}
+
+class TopicDetailsRouteArgs {
+  const TopicDetailsRouteArgs({
+    this.key,
+    required this.topic,
+  });
+
+  final Key? key;
+
+  final TopicModel topic;
+
+  @override
+  String toString() {
+    return 'TopicDetailsRouteArgs{key: $key, topic: $topic}';
+  }
 }
 
 /// generated route for
