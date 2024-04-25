@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:calorie_counter/core/presentation/pop_ups.dart';
 import 'package:calorie_counter/core/presentation/theme.dart';
 import 'package:calorie_counter/core/presentation/widgets/base_app_date_picker.dart';
+import 'package:calorie_counter/core/utils/utils.dart';
 import 'package:calorie_counter/features/body_parameters/presentation/body_parameters_card.dart';
 import 'package:calorie_counter/features/calorie_counter/logic/food_consuming_notifier.dart';
 import 'package:calorie_counter/features/calorie_counter/presentation/calorie_counter_card.dart';
@@ -22,6 +23,7 @@ class DashBoardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final filterNotifier = context.watch<DashBoardFilterNotifier>();
     final date = filterNotifier.selectedDate;
+    final String formattedDate = formatDateTime(date);
     final foodNotifier = context.watch<FoodConsumingNotifier>();
     final waterNotifier = context.watch<WaterConsumingNotifier>();
 
@@ -39,7 +41,7 @@ class DashBoardScreen extends StatelessWidget {
       appBar: AppBar(
         title: Row(
           children: [
-            Text('${date.day} ${date.month}', style: AppTextStyle.s20w700),
+            Text(formattedDate, style: AppTextStyle.s20w700),
             SizedBox(
               width: 40,
               child: IconButton(

@@ -21,9 +21,9 @@ class _BaseAppDatePickerState extends State<BaseAppDatePicker> {
           SizedBox(
             height: 200,
             child: CupertinoDatePicker(
-              // maximumDate: DateTime.now(),
+              maximumDate: DateTime.now(),
               mode: CupertinoDatePickerMode.date,
-              initialDateTime: DateTime.now(),
+              initialDateTime: widget.initialDate,
               onDateTimeChanged: (DateTime newDate) {
                 _value = newDate;
               },
