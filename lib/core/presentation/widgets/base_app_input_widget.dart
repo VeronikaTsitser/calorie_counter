@@ -12,6 +12,7 @@ class BaseAppInputWidget<T> extends StatelessWidget {
     required this.isEditMode,
     this.value,
     this.measurement,
+    this.hint,
   });
   final String label;
   final ValueChanged<String?>? onChanged;
@@ -19,6 +20,7 @@ class BaseAppInputWidget<T> extends StatelessWidget {
   final bool isEditMode;
   final T? value;
   final String? measurement;
+  final String? hint;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +48,8 @@ class BaseAppInputWidget<T> extends StatelessWidget {
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(vertical: 0),
                     isCollapsed: true,
-                    hintText: 'Введите значение',
+                    hintText: hint ?? 'Введите значение',
+                    hintMaxLines: 3,
                     hintStyle: AppTextStyle.s16w400.copyWith(color: AppColors.hint),
                     border: InputBorder.none,
                   ),
