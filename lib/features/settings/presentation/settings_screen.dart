@@ -3,6 +3,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:calorie_counter/core/constant/app_const.dart';
 import 'package:calorie_counter/core/presentation/theme.dart';
 import 'package:calorie_counter/core/router/router.dart';
+import 'package:calorie_counter/core/services/rating_service.dart';
 import 'package:calorie_counter/core/utils/utils.dart';
 import 'package:flutter/material.dart';
 
@@ -33,11 +34,7 @@ class SettingsScreen extends StatelessWidget {
               onTap: () => AutoRouter.of(context).push(const AppealRoute()),
             ),
             const Spacer(),
-            ElevatedButton(
-                onPressed: () {
-                  //TODO
-                },
-                child: const Text('Оценить приложение')),
+            ElevatedButton(onPressed: () => showAppRating(), child: const Text('Оценить приложение')),
             const SizedBox(height: 12),
           ],
         ),
