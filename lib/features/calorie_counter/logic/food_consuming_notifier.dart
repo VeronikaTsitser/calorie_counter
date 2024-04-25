@@ -44,4 +44,44 @@ class FoodConsumingNotifier extends ChangeNotifier {
     log('Food consuming added: $foodName');
     notifyListeners();
   }
+
+  Future<void> deleteFoodConsuming(int id) async {
+    _foodConsumingList.removeWhere((element) => element.id == id);
+    await _foodConsumingRepository.setFoodConsuming(_foodConsumingList);
+    notifyListeners();
+  }
+
+  Future<void> addMockFoodConsuming() async {
+    List<FoodConsumingModel> foodConsumingList = [
+      FoodConsumingModel(
+        id: 1,
+        name: 'Apple',
+        calories: 52,
+        time: DateTime(2024, 3, 28),
+        composition: 'Apple',
+        comment: 'Good for health',
+        cost: 0.5,
+      ),
+      FoodConsumingModel(
+        id: 2,
+        name: 'Banana',
+        calories: 89,
+        time: DateTime(2024, 4, 24),
+        composition: 'Banana',
+        comment: 'Good for health',
+        cost: 0.5,
+      ),
+      FoodConsumingModel(
+        id: 3,
+        name: 'Orange',
+        calories: 62,
+        time: DateTime.now(),
+        composition: 'Orange',
+        comment: 'Good for health',
+        cost: 0.5,
+      ),
+    ];
+    await _foodConsumingRepository.setFoodConsuming(foodConsumingList);
+    notifyListeners();
+  }
 }

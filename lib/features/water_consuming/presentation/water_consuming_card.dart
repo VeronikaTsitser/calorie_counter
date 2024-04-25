@@ -5,6 +5,7 @@ import 'package:calorie_counter/core/presentation/widgets/base_app_container.dar
 import 'package:calorie_counter/core/router/router.dart';
 import 'package:calorie_counter/features/statistic/logic/statistic_notifier.dart';
 import 'package:calorie_counter/features/water_consuming/domain/models/water_consuming_model.dart';
+import 'package:calorie_counter/features/water_consuming/logic/water_consuming_details_notifier.dart';
 import 'package:calorie_counter/features/water_consuming/logic/water_consuming_notifier.dart';
 import 'package:calorie_counter/features/water_consuming/presentation/components/water_consuming_bottom_sheet_widget.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +29,7 @@ class WaterConsumingCard extends StatelessWidget {
               runSpacing: 12,
               children: [
                 ...notifier.waterConsumingList
-                    .map((e) => _ConsumedWaterContainer(consumedWaterValue: e.consumedWaterValue)),
+                    .map((e) => _ConsumedWaterContainer(consumedWaterValue: e.consumedWaterValue, id: e.id)),
                 const _AddWaterConsumingButton(),
               ],
             ),
@@ -40,14 +41,20 @@ class WaterConsumingCard extends StatelessWidget {
 }
 
 class _ConsumedWaterContainer extends StatelessWidget {
-  const _ConsumedWaterContainer({required this.consumedWaterValue});
+  const _ConsumedWaterContainer({required this.consumedWaterValue, required this.id});
   final int consumedWaterValue;
+  final int id;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => AutoRouter.of(context).push(
-          const WaterConsumingDetailsRoute()), //TODO добавить получение конкретного напитка или передавать в конструкторе
+      onTap: () {
+        context.read<WaterConsumingDetailsNotifier>().getWaterConsumingById(id);
+        AutoRouter.of(context).push(const WaterConsumingDetailsRoute()).then((_) {
+          context.read<WaterConsumingNotifier>().init();
+          context.read<StatisticNotifier>().getTotalWater();
+        });
+      },
       child: Container(
         width: 68,
         height: 68,

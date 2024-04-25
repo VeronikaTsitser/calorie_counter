@@ -20,6 +20,8 @@ class DashBoardScreen extends StatelessWidget {
           SharedPreferences.getInstance().then((prefs) {
             prefs.clear();
           });
+          // context.read<FoodConsumingNotifier>().addMockFoodConsuming();
+          // context.read<WaterConsumingNotifier>().addMockWaterConsuming();
         },
         child: const Icon(CupertinoIcons.clear),
       ),

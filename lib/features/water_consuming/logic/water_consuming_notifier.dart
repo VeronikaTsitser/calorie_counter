@@ -30,4 +30,30 @@ class WaterConsumingNotifier extends ChangeNotifier {
     await _waterConsumingRepository.setWaterConsuming(_waterConsumingList);
     notifyListeners();
   }
+
+  Future<void> addMockWaterConsuming() async {
+    List<WaterConsumingModel> waterConsumingList = [
+      WaterConsumingModel(
+        id: 1,
+        name: 'Water',
+        consumedWaterValue: 200,
+        time: DateTime(2024, 3, 28),
+      ),
+      WaterConsumingModel(
+        id: 2,
+        name: 'Tea',
+        consumedWaterValue: 300,
+        time: DateTime(2024, 4, 24),
+      ),
+      WaterConsumingModel(
+        id: 3,
+        name: 'Coffee',
+        consumedWaterValue: 150,
+        time: DateTime.now(),
+      ),
+    ];
+    _waterConsumingList.addAll(waterConsumingList);
+    await _waterConsumingRepository.setWaterConsuming(waterConsumingList);
+    notifyListeners();
+  }
 }

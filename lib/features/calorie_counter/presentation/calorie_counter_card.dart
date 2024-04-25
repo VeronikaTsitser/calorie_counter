@@ -72,7 +72,10 @@ class _FoodConsumingContainer extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         context.read<FoodConsumingDetailsNotifier>().getFoodConsumingById(id);
-        AutoRouter.of(context).push(const FoodConsumingDetailsRoute());
+        AutoRouter.of(context).push(const FoodConsumingDetailsRoute()).then((value) {
+          context.read<FoodConsumingNotifier>().init();
+          context.read<StatisticNotifier>().getTotalCalories();
+        });
       },
       child: Container(
         margin: const EdgeInsets.only(bottom: 12),

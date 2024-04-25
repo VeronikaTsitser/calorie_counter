@@ -8,8 +8,7 @@ class WaterConsumingDetailsNotifier extends ChangeNotifier {
   WaterConsumingDetailsNotifier(this._waterConsumingRepository);
   final WaterConsumingRepository _waterConsumingRepository;
 
-  final int _id = 0;
-  int get id => _id;
+  int _id = 0;
 
   String _title = '';
   String get title => _title;
@@ -45,6 +44,7 @@ class WaterConsumingDetailsNotifier extends ChangeNotifier {
     _title = waterConsuming.name;
     _waterConsuming = waterConsuming.consumedWaterValue;
     _waterConsumingTime = waterConsuming.time;
+    _id = id;
     notifyListeners();
   }
 

@@ -14,9 +14,10 @@ class WaterConsumingDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final notifier = context.watch<WaterConsumingDetailsNotifier>();
     return Scaffold(
       appBar: AppBar(
-        // title: Text(notifier.title, style: AppTextStyle.s20w700),
+        title: Text(notifier.title, style: AppTextStyle.s20w700),
         actions: [
           IconButton(
             icon: const Icon(CupertinoIcons.ellipsis, color: AppColors.primary),
@@ -24,7 +25,7 @@ class WaterConsumingDetailsScreen extends StatelessWidget {
                 showAppActionSheet<PopUpAction?>(context: context, child: const EditDeleteActionSheet()).then(
               (value) {
                 if (value == PopUpAction.edit) {
-                  // notifier.setEditMode(true);
+                  notifier.setEditMode(true);
                 }
               },
             ),
