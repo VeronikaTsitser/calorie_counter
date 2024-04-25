@@ -12,8 +12,7 @@ Future<void> showAppRating() async {
       await inAppReview.requestReview();
     } else {
       log('Rating openStoreListing');
-      await inAppReview.openStoreListing(
-          appStoreId: 'https://apps.apple.com/ru/app/vision-board-maker-moodboard/id6446154363');
+      await inAppReview.openStoreListing(appStoreId: '');
     }
   } catch (e, s) {
     log(e.toString(), stackTrace: s);
