@@ -8,6 +8,7 @@ import 'package:calorie_counter/features/topics/logic/topics_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:octo_image/octo_image.dart';
 
 @RoutePage()
 class TopicsListScreen extends StatelessWidget {
@@ -54,7 +55,13 @@ class TopicsListCard extends StatelessWidget {
           child: Stack(
             fit: StackFit.expand,
             children: [
-              Image.asset(topic.path, fit: BoxFit.fitWidth),
+              OctoImage(
+                image: AssetImage(topic.path),
+                fit: BoxFit.fitWidth,
+                fadeInCurve: Curves.easeInOut,
+                fadeInDuration: const Duration(milliseconds: 500),
+                placeholderBuilder: (context) => Container(color: Colors.white),
+              ),
               Positioned(
                 bottom: 0,
                 left: 0,
