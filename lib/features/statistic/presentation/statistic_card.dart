@@ -43,7 +43,8 @@ class _DatePeriodButtonState extends State<DatePeriodButton> {
   @override
   Widget build(BuildContext context) {
     final notifier = context.watch<StatisticNotifier>();
-    return GestureDetector(
+    return InkWell(
+      overlayColor: MaterialStateProperty.all(Colors.transparent),
       onTap: () =>
           showAppActionSheet<TimePeriodEnum>(context: context, child: const _ChooseDatePeriodActionSheet()).then(
         (value) {
@@ -65,18 +66,15 @@ class _DatePeriodButtonState extends State<DatePeriodButton> {
           }
         },
       ),
-      child: Row(
-        children: [
-          Text(title, style: AppTextStyle.s20w700),
-          SizedBox(
-            width: 40,
-            child: IconButton(
-              onPressed: () {},
-              icon: const Icon(CupertinoIcons.arrowtriangle_down_fill),
-              iconSize: 14,
-            ),
-          ),
-        ],
+      child: SizedBox(
+        height: 40,
+        child: Row(
+          children: [
+            Text(title, style: AppTextStyle.s20w700),
+            const SizedBox(width: 8),
+            const Icon(CupertinoIcons.arrowtriangle_down_fill, size: 14),
+          ],
+        ),
       ),
     );
   }
