@@ -19,8 +19,10 @@ class WaterConsumingNotifier extends ChangeNotifier {
     required String drinkName,
     required int waterConsuming,
     required DateTime lastWaterConsumingTime,
+    required int id,
   }) async {
     _waterConsumingList.add(WaterConsumingModel(
+      id: id,
       name: drinkName,
       consumedWaterValue: waterConsuming,
       time: lastWaterConsumingTime,

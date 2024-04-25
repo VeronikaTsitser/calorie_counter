@@ -82,6 +82,7 @@ class _AddWaterConsumingButton extends StatelessWidget {
               if (value != null) {
                 return waterConsumingNotifier
                     .addWaterConsuming(
+                        id: value.id,
                         drinkName: value.name,
                         waterConsuming: value.consumedWaterValue,
                         lastWaterConsumingTime: value.time)

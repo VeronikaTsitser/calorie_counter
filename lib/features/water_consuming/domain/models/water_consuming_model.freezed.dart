@@ -20,6 +20,7 @@ WaterConsumingModel _$WaterConsumingModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$WaterConsumingModel {
+  int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   int get consumedWaterValue => throw _privateConstructorUsedError;
   DateTime get time => throw _privateConstructorUsedError;
@@ -36,7 +37,7 @@ abstract class $WaterConsumingModelCopyWith<$Res> {
           WaterConsumingModel value, $Res Function(WaterConsumingModel) then) =
       _$WaterConsumingModelCopyWithImpl<$Res, WaterConsumingModel>;
   @useResult
-  $Res call({String name, int consumedWaterValue, DateTime time});
+  $Res call({int id, String name, int consumedWaterValue, DateTime time});
 }
 
 /// @nodoc
@@ -52,11 +53,16 @@ class _$WaterConsumingModelCopyWithImpl<$Res, $Val extends WaterConsumingModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? name = null,
     Object? consumedWaterValue = null,
     Object? time = null,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -81,7 +87,7 @@ abstract class _$$WaterConsumingModelImplCopyWith<$Res>
       __$$WaterConsumingModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, int consumedWaterValue, DateTime time});
+  $Res call({int id, String name, int consumedWaterValue, DateTime time});
 }
 
 /// @nodoc
@@ -95,11 +101,16 @@ class __$$WaterConsumingModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? name = null,
     Object? consumedWaterValue = null,
     Object? time = null,
   }) {
     return _then(_$WaterConsumingModelImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -120,13 +131,16 @@ class __$$WaterConsumingModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$WaterConsumingModelImpl implements _WaterConsumingModel {
   _$WaterConsumingModelImpl(
-      {required this.name,
+      {required this.id,
+      required this.name,
       required this.consumedWaterValue,
       required this.time});
 
   factory _$WaterConsumingModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$WaterConsumingModelImplFromJson(json);
 
+  @override
+  final int id;
   @override
   final String name;
   @override
@@ -136,7 +150,7 @@ class _$WaterConsumingModelImpl implements _WaterConsumingModel {
 
   @override
   String toString() {
-    return 'WaterConsumingModel(name: $name, consumedWaterValue: $consumedWaterValue, time: $time)';
+    return 'WaterConsumingModel(id: $id, name: $name, consumedWaterValue: $consumedWaterValue, time: $time)';
   }
 
   @override
@@ -144,6 +158,7 @@ class _$WaterConsumingModelImpl implements _WaterConsumingModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$WaterConsumingModelImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.consumedWaterValue, consumedWaterValue) ||
                 other.consumedWaterValue == consumedWaterValue) &&
@@ -152,7 +167,8 @@ class _$WaterConsumingModelImpl implements _WaterConsumingModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, name, consumedWaterValue, time);
+  int get hashCode =>
+      Object.hash(runtimeType, id, name, consumedWaterValue, time);
 
   @JsonKey(ignore: true)
   @override
@@ -171,13 +187,16 @@ class _$WaterConsumingModelImpl implements _WaterConsumingModel {
 
 abstract class _WaterConsumingModel implements WaterConsumingModel {
   factory _WaterConsumingModel(
-      {required final String name,
+      {required final int id,
+      required final String name,
       required final int consumedWaterValue,
       required final DateTime time}) = _$WaterConsumingModelImpl;
 
   factory _WaterConsumingModel.fromJson(Map<String, dynamic> json) =
       _$WaterConsumingModelImpl.fromJson;
 
+  @override
+  int get id;
   @override
   String get name;
   @override

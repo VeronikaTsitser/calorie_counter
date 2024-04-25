@@ -27,6 +27,7 @@ class _WaterConsumingBottomSheetWidgetState extends State<WaterConsumingBottomSh
           Navigator.pop(
               context,
               WaterConsumingModel(
+                id: DateTime.now().millisecondsSinceEpoch,
                 name: _drinkName,
                 consumedWaterValue: _waterConsuming,
                 time: _lastWaterConsumingTime,
