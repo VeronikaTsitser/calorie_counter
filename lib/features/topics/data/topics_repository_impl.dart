@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:calorie_counter/features/topics/domain/models/topic_model.dart';
 import 'package:calorie_counter/features/topics/domain/topics_repository.dart';
@@ -16,7 +17,7 @@ class TopicsRepositoryImpl implements TopicsRepository {
       }
       return topics;
     } catch (e) {
-      print('Ошибка при чтении файла: $e');
+      log('Ошибка при чтении файла: $e');
       return [];
     }
   }
