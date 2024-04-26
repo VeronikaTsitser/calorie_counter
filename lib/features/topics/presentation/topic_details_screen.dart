@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:calorie_counter/core/presentation/theme.dart';
 import 'package:calorie_counter/features/topics/domain/models/topic_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 @RoutePage()
@@ -32,7 +33,11 @@ class TopicDetailsScreen extends StatelessWidget {
                       ),
                       child: Image.asset(topic.path, fit: BoxFit.fitWidth)),
                   SizedBox(height: 20.h),
-                  Text(topic.content, style: AppTextStyle.s16w400),
+                  MarkdownBody(
+                      data: topic.content,
+                      styleSheet: MarkdownStyleSheet.fromTheme(Theme.of(context).copyWith(
+                        textTheme: AppTextTheme.theme,
+                      ))),
                   SizedBox(height: 20.h),
                 ],
               ),

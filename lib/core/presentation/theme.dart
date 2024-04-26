@@ -40,7 +40,7 @@ abstract final class AppTextTheme {
   static const theme = TextTheme(
     titleLarge: AppTextStyle.s20w700,
     titleMedium: AppTextStyle.s16w600,
-    bodySmall: AppTextStyle.s16w400,
+    bodyMedium: AppTextStyle.s16w400,
     labelSmall: AppTextStyle.s12w400,
   );
 }
