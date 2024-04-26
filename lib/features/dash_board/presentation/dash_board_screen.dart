@@ -30,34 +30,31 @@ class DashBoardScreen extends StatelessWidget {
     return Scaffold(
       // floatingActionButton: FloatingActionButton(
       //   onPressed: () {
-      //     SharedPreferences.getInstance().then((prefs) {
-      //       prefs.clear();
-      //     });
-      //     // context.read<FoodConsumingNotifier>().addMockFoodConsuming();
-      //     // context.read<WaterConsumingNotifier>().addMockWaterConsuming();
+      //     // SharedPreferences.getInstance().then((prefs) {
+      //     //   prefs.clear();
+      //     // });
+      //     context.read<FoodConsumingNotifier>().addMockFoodConsuming();
+      //     context.read<WaterConsumingNotifier>().addMockWaterConsuming();
       //   },
       //   child: const Icon(CupertinoIcons.clear),
       // ),
       appBar: AppBar(
-        title: Row(
-          children: [
-            Text(formattedDate, style: AppTextStyle.s20w700),
-            SizedBox(
-              width: 40,
-              child: IconButton(
-                onPressed: () =>
-                    showAppTimePicker(context: context, child: BaseAppDatePicker(initialDate: date)).then((value) {
-                  if (value != null) {
-                    filterNotifier.setSelectedDate(value);
-                    foodNotifier.getSortedConsumingsByDate(value);
-                    waterNotifier.getSortedConsumingsByDate(value);
-                  }
-                }),
-                icon: const Icon(CupertinoIcons.arrowtriangle_down_fill, color: AppColors.black),
-                iconSize: 14,
-              ),
-            ),
-          ],
+        title: InkWell(
+          overlayColor: MaterialStateProperty.all(Colors.transparent),
+          onTap: () => showAppTimePicker(context: context, child: BaseAppDatePicker(initialDate: date)).then((value) {
+            if (value != null) {
+              filterNotifier.setSelectedDate(value);
+              foodNotifier.getSortedConsumingsByDate(value);
+              waterNotifier.getSortedConsumingsByDate(value);
+            }
+          }),
+          child: Row(
+            children: [
+              Text(formattedDate, style: AppTextStyle.s20w700),
+              const SizedBox(width: 10),
+              const Icon(CupertinoIcons.arrowtriangle_down_fill, color: AppColors.black, size: 14),
+            ],
+          ),
         ),
         actions: [
           IconButton(
@@ -69,22 +66,30 @@ class DashBoardScreen extends StatelessWidget {
               onPressed: () => AutoRouter.of(context).push(const SettingsRoute())),
         ],
       ),
-      body: CustomScrollView(
-        slivers: [
-          SliverPadding(
-            padding: const EdgeInsets.symmetric(horizontal: 20).copyWith(bottom: 20),
-            sliver: SliverList(
-              delegate: SliverChildListDelegate(
-                [
-                  const CalorieCounterCard(),
-                  const WaterConsumingCard(),
-                  const BodyParametersCard(),
-                  const StatisticCard()
-                ],
+      body: GestureDetector(
+        onTap: () {
+          FocusScopeNode currentFocus = FocusScope.of(context);
+          if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild != null) {
+            currentFocus.focusedChild!.unfocus();
+          }
+        },
+        child: CustomScrollView(
+          slivers: [
+            SliverPadding(
+              padding: const EdgeInsets.symmetric(horizontal: 20).copyWith(bottom: 20),
+              sliver: SliverList(
+                delegate: SliverChildListDelegate(
+                  [
+                    const CalorieCounterCard(),
+                    const WaterConsumingCard(),
+                    const BodyParametersCard(),
+                    const StatisticCard()
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

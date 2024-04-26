@@ -65,99 +65,107 @@ class _FoodConsumingDetailsBodyState extends State<_FoodConsumingDetailsBody> {
   Widget build(BuildContext context) {
     final notifier = context.watch<FoodConsumingDetailsNotifier>();
     final isEditMode = notifier.isEditMode;
-    return Form(
-      key: _formKey,
-      child: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: CustomScrollView(
-            slivers: [
-              SliverToBoxAdapter(
-                child: BaseAppContainer(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      BaseAppInputWidget(
-                        isEditMode: isEditMode,
-                        label: 'Название',
-                        value: notifier.title,
-                        onChanged: (value) {
-                          if (value != null) {
-                            notifier.setTitle(value);
-                          }
-                        },
-                      ),
-                      BaseAppInputWidget(
-                        isEditMode: isEditMode,
-                        label: 'Количество калорий',
-                        keyboardType: TextInputType.number,
-                        value: notifier.calories,
-                        onChanged: (value) {
-                          if (value != null) {
-                            final getCalories = int.tryParse(value);
-                            if (getCalories != null) {
-                              notifier.setCalories(getCalories);
-                            }
-                          }
-                        },
-                      ),
-                      BaseAppTimeInputWidget(
-                          time: notifier.foodConsumingTime,
+    return GestureDetector(
+      onTap: () {
+        FocusScopeNode currentFocus = FocusScope.of(context);
+        if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild != null) {
+          currentFocus.focusedChild!.unfocus();
+        }
+      },
+      child: Form(
+        key: _formKey,
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: CustomScrollView(
+              slivers: [
+                SliverToBoxAdapter(
+                  child: BaseAppContainer(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        BaseAppInputWidget(
                           isEditMode: isEditMode,
-                          label: 'Время приема',
-                          onTimeChanged: (value) {
+                          label: 'Название',
+                          value: notifier.title,
+                          onChanged: (value) {
                             if (value != null) {
-                              notifier.setFoodConsumingTime(value);
-                            }
-                          }),
-                      BaseAppNotRequiredInputWidget(
-                        isEditMode: isEditMode,
-                        label: 'Состав',
-                        value: notifier.composition,
-                        onChanged: (value) {
-                          if (value != null) {
-                            notifier.setComposition(value);
-                          }
-                        },
-                      ),
-                      BaseAppNotRequiredInputWidget(
-                        isEditMode: isEditMode,
-                        label: 'Комментарий',
-                        value: notifier.comment,
-                        onChanged: (value) {
-                          if (value != null) {
-                            notifier.setComment(value);
-                          }
-                        },
-                      ),
-                      BaseAppNotRequiredInputWidget(
-                        isEditMode: isEditMode,
-                        label: 'Стоимость',
-                        value: notifier.cost,
-                        keyboardType: TextInputType.number,
-                        measurement: 'р.',
-                        onChanged: (value) {
-                          if (value != null) {
-                            notifier.setCost(double.tryParse(value));
-                          }
-                        },
-                      ),
-                      if (notifier.isEditMode) ...[
-                        const SizedBox(height: 13),
-                        ElevatedButton(
-                          child: const Text('Готово'),
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              notifier.updateFoodConsuming();
+                              notifier.setTitle(value);
                             }
                           },
                         ),
-                      ]
-                    ],
+                        BaseAppInputWidget(
+                          isEditMode: isEditMode,
+                          label: 'Количество калорий',
+                          keyboardType: TextInputType.number,
+                          value: notifier.calories,
+                          onChanged: (value) {
+                            if (value != null) {
+                              final getCalories = int.tryParse(value);
+                              if (getCalories != null) {
+                                notifier.setCalories(getCalories);
+                              }
+                            }
+                          },
+                        ),
+                        BaseAppTimeInputWidget(
+                            time: notifier.foodConsumingTime,
+                            isEditMode: isEditMode,
+                            label: 'Время приема',
+                            onTimeChanged: (value) {
+                              if (value != null) {
+                                notifier.setFoodConsumingTime(value);
+                              }
+                            }),
+                        BaseAppNotRequiredInputWidget(
+                          isEditMode: isEditMode,
+                          label: 'Состав',
+                          value: notifier.composition,
+                          onChanged: (value) {
+                            if (value != null) {
+                              notifier.setComposition(value);
+                            }
+                          },
+                        ),
+                        BaseAppNotRequiredInputWidget(
+                          isEditMode: isEditMode,
+                          label: 'Комментарий',
+                          value: notifier.comment,
+                          onChanged: (value) {
+                            if (value != null) {
+                              notifier.setComment(value);
+                            }
+                          },
+                        ),
+                        BaseAppNotRequiredInputWidget(
+                          isEditMode: isEditMode,
+                          label: 'Стоимость',
+                          value: notifier.cost,
+                          keyboardType: TextInputType.number,
+                          measurement: 'р.',
+                          onChanged: (value) {
+                            if (value != null) {
+                              notifier.setCost(double.tryParse(value));
+                            }
+                          },
+                        ),
+                        if (notifier.isEditMode) ...[
+                          const SizedBox(height: 13),
+                          ElevatedButton(
+                            child: const Text('Готово'),
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                notifier.updateFoodConsuming();
+                              }
+                            },
+                          ),
+                        ]
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

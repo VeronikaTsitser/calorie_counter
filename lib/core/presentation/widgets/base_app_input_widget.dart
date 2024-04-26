@@ -39,7 +39,7 @@ class BaseAppInputWidget<T> extends StatelessWidget {
                   initialValue: value?.toString(),
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
-                    if (value == null || value.isEmpty) {
+                    if (value == null || value.trim().isEmpty) {
                       return 'Введите значение';
                     }
                     return null;

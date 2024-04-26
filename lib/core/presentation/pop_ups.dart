@@ -102,6 +102,7 @@ class _AppTimePickerState extends State<AppTimePicker> {
             child: CupertinoDatePicker(
               mode: CupertinoDatePickerMode.time,
               initialDateTime: widget.initialTime,
+              maximumDate: DateTime.now(),
               onDateTimeChanged: (DateTime newTime) => value = newTime,
             ),
           ),

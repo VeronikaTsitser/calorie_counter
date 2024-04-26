@@ -22,90 +22,82 @@ class _BodyParametersCardState extends State<BodyParametersCard> {
     final isEditMode = notifier.isEditMode;
     return Form(
       key: _formKey,
-      child: GestureDetector(
-        onTap: () {
-          FocusScopeNode currentFocus = FocusScope.of(context);
-          if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild != null) {
-            currentFocus.focusedChild!.unfocus();
-          }
-        },
-        child: BaseAppContainer(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _BodyParametersTitle(isEditMode: isEditMode),
-              const SizedBox(height: 15),
-              BaseAppInputWidget(
+      child: BaseAppContainer(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _BodyParametersTitle(isEditMode: isEditMode),
+            const SizedBox(height: 15),
+            BaseAppInputWidget(
+              isEditMode: isEditMode,
+              label: 'Вес',
+              measurement: 'кг',
+              value: notifier.weight,
+              keyboardType: TextInputType.number,
+              onChanged: (value) {
+                if (value != null) {
+                  notifier.setWeight(double.tryParse(value));
+                }
+              },
+            ),
+            BaseAppInputWidget(
+              isEditMode: isEditMode,
+              label: 'Рост',
+              measurement: 'см',
+              value: notifier.height,
+              keyboardType: TextInputType.number,
+              onChanged: (value) {
+                if (value != null) {
+                  notifier.setHeight(int.tryParse(value));
+                }
+              },
+            ),
+            BaseAppInputWidget(
+              isEditMode: isEditMode,
+              label: 'Процент жира',
+              measurement: '%',
+              value: notifier.fatPercentage,
+              keyboardType: TextInputType.number,
+              onChanged: (value) {
+                if (value != null) {
+                  notifier.setFatPercentage(int.tryParse(value));
+                }
+              },
+            ),
+            BaseAppInputWidget(
                 isEditMode: isEditMode,
-                label: 'Вес',
-                measurement: 'кг',
-                value: notifier.weight,
+                label: 'Необходимое количество калорий',
+                measurement: 'ккал',
+                value: notifier.calories,
                 keyboardType: TextInputType.number,
                 onChanged: (value) {
                   if (value != null) {
-                    notifier.setWeight(double.tryParse(value));
+                    notifier.setCalories(int.tryParse(value));
                   }
-                },
-              ),
-              BaseAppInputWidget(
+                }),
+            BaseAppInputWidget(
                 isEditMode: isEditMode,
-                label: 'Рост',
-                measurement: 'см',
-                value: notifier.height,
+                label: 'Необходимое количество жидкости',
+                measurement: 'мл',
+                value: notifier.water,
                 keyboardType: TextInputType.number,
                 onChanged: (value) {
                   if (value != null) {
-                    notifier.setHeight(int.tryParse(value));
+                    notifier.setWater(int.tryParse(value));
+                  }
+                }),
+            if (isEditMode) ...[
+              const SizedBox(height: 13),
+              ElevatedButton(
+                child: const Text('Готово'),
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    context.read<BodyParameterNotifier>().saveBodyParameters();
                   }
                 },
               ),
-              BaseAppInputWidget(
-                isEditMode: isEditMode,
-                label: 'Процент жира',
-                measurement: '%',
-                value: notifier.fatPercentage,
-                keyboardType: TextInputType.number,
-                onChanged: (value) {
-                  if (value != null) {
-                    notifier.setFatPercentage(int.tryParse(value));
-                  }
-                },
-              ),
-              BaseAppInputWidget(
-                  isEditMode: isEditMode,
-                  label: 'Необходимое количество калорий',
-                  measurement: 'ккал',
-                  value: notifier.calories,
-                  keyboardType: TextInputType.number,
-                  onChanged: (value) {
-                    if (value != null) {
-                      notifier.setCalories(int.tryParse(value));
-                    }
-                  }),
-              BaseAppInputWidget(
-                  isEditMode: isEditMode,
-                  label: 'Необходимое количество жидкости',
-                  measurement: 'мл',
-                  value: notifier.water,
-                  keyboardType: TextInputType.number,
-                  onChanged: (value) {
-                    if (value != null) {
-                      notifier.setWater(int.tryParse(value));
-                    }
-                  }),
-              if (isEditMode) ...[
-                const SizedBox(height: 13),
-                ElevatedButton(
-                  child: const Text('Готово'),
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      context.read<BodyParameterNotifier>().saveBodyParameters();
-                    }
-                  },
-                ),
-              ]
-            ],
-          ),
+            ]
+          ],
         ),
       ),
     );

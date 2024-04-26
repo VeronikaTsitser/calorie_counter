@@ -3,6 +3,7 @@ import 'package:calorie_counter/core/presentation/bottom_sheets.dart';
 import 'package:calorie_counter/core/presentation/theme.dart';
 import 'package:calorie_counter/core/presentation/widgets/base_app_container.dart';
 import 'package:calorie_counter/core/router/router.dart';
+import 'package:calorie_counter/features/dash_board/logic/dash_board_filter_notifier.dart';
 import 'package:calorie_counter/features/statistic/logic/statistic_notifier.dart';
 import 'package:calorie_counter/features/water_consuming/domain/models/water_consuming_model.dart';
 import 'package:calorie_counter/features/water_consuming/logic/water_consuming_details_notifier.dart';
@@ -47,11 +48,12 @@ class _ConsumedWaterContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final notifier = context.watch<DashBoardFilterNotifier>();
     return GestureDetector(
       onTap: () {
         context.read<WaterConsumingDetailsNotifier>().getWaterConsumingById(id);
         AutoRouter.of(context).push(const WaterConsumingDetailsRoute()).then((_) {
-          context.read<WaterConsumingNotifier>().init();
+          context.read<WaterConsumingNotifier>().getSortedConsumingsByDate(notifier.selectedDate);
           context.read<StatisticNotifier>().getTotalWater();
         });
       },
