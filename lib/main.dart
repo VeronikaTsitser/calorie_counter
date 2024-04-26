@@ -20,6 +20,7 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
@@ -73,6 +74,13 @@ class _CalorieCounterAppState extends State<CalorieCounterApp> {
         child: MaterialApp.router(
           routerConfig: _appRouter.config(),
           theme: lightTheme,
+          localizationsDelegates: const [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [Locale('en'), Locale('ru')],
+          locale: const Locale('ru'),
         ),
       ),
     );
